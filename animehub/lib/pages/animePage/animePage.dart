@@ -15,9 +15,8 @@ class AnimePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                child: Image.network(
-                    "https://sm.ign.com/ign_br/tv/m/my-hero-ac/my-hero-academia_f9ae.jpg"),
+              Image.network(
+                "https://www.animesgratisbr.biz/wp-content/uploads/2021/03/bokunohero5.jpg",
                 height: 500,
               ),
               Card(
@@ -42,19 +41,31 @@ class AnimePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    child: Container(
-                      color: Colors.red,
+                    child: Card(
+                      color: Colors.grey,
+                      child: Center(
+                        child: Text(
+                          "Rating: 4.6",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                     height: 50,
-                    width: 50,
+                    width: 200,
                   ),
                   Padding(padding: const EdgeInsets.all(8.0)),
                   SizedBox(
-                    child: Container(
-                      color: Colors.blue,
+                    child: Card(
+                      color: Colors.grey,
+                      child: Center(
+                        child: Text(
+                          "Popularity: 9",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                     height: 50,
-                    width: 50,
+                    width: 200,
                   ),
                 ],
               ),

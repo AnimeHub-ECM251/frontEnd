@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:animehub/consts.dart';
 
 class AnimePage extends StatelessWidget {
   const AnimePage({Key? key}) : super(key: key);
@@ -6,6 +7,7 @@ class AnimePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: kblack),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Boku no Pico"),
@@ -19,34 +21,21 @@ class AnimePage extends StatelessWidget {
                 "https://www.animesgratisbr.biz/wp-content/uploads/2021/03/bokunohero5.jpg",
                 height: 500,
               ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Add to favorites",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Add to my list",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+              ButtonCard(text: "Add to favorites",),
+              ButtonCard(text: "Add to watch list",),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     child: Card(
-                      color: Colors.grey,
+                      color: kdarkGrey,
+                      shadowColor: klightGrey,
+                      elevation: 5,
                       child: Center(
                         child: Text(
                           "Rating: 4.6",
                           textAlign: TextAlign.center,
+                          style: kbuttonStyle,
                         ),
                       ),
                     ),

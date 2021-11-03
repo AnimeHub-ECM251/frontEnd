@@ -7,6 +7,7 @@ const kdarkGrey = Color.fromARGB(255, 41, 41, 41);
 const kblack = Color.fromARGB(255, 27, 27, 27);
 const kwhite = Colors.white;
 
+/// TextStyles constants
 const kbuttonCardTextStyle =
     TextStyle(color: kwhite, fontWeight: FontWeight.w400, letterSpacing: 1.0);
     

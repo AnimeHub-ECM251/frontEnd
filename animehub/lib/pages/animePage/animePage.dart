@@ -45,6 +45,7 @@ class AnimePage extends StatelessWidget {
                   ),
                 ],
               ),
+              /// Sinopse widget
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -59,7 +60,7 @@ class AnimePage extends StatelessWidget {
                           style: TextStyle(color: korange, fontWeight: FontWeight.w600, fontSize: 16),
                         ),
                         Text("Esse anime é um bait do Boku no Hero!",
-                        style: TextStyle(fontWeight: FontWeight.w500),)
+                        style: TextStyle(fontWeight: FontWeight.w500, color: kwhite),)
                       ],
                     ),
                   ),

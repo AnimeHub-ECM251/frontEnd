@@ -29,8 +29,8 @@ class InfoCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: klightGrey,
-              blurRadius: 5,
-              spreadRadius: -6,
+              blurRadius: 3,
+              spreadRadius: -4,
             ),
           ],
         ),

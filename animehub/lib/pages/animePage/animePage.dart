@@ -1,5 +1,7 @@
 import 'package:animehub/widgets/ButtonCard.dart';
+import 'package:animehub/widgets/Comment.dart';
 import 'package:animehub/widgets/InfoCard.dart';
+import 'package:animehub/widgets/Sinopse.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/consts.dart';
 
@@ -7,6 +9,8 @@ import 'package:animehub/consts.dart';
 
 class AnimePage extends StatelessWidget {
   const AnimePage({Key? key}) : super(key: key);
+
+  /// Request aqui e separar dados.
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +29,12 @@ class AnimePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              /// Cartaz do Anime
               Image.network(
                 "https://www.animesgratisbr.biz/wp-content/uploads/2021/03/bokunohero5.jpg",
                 height: 500,
               ),
-              ButtonCard(text: "Add to favorites"),
+              // ButtonCard(text: "Add to favorites"),
               ButtonCard(text: "Add to watch list"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,26 +50,25 @@ class AnimePage extends StatelessWidget {
                   ),
                 ],
               ),
+
               /// Sinopse widget
+              Synopsis(synopsis: "Aqui vai ter a parte de sinopse do recurso."),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: klightGrey),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(4,4,4,0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          "Sinopse",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: korange, fontWeight: FontWeight.w600, fontSize: 16),
-                        ),
-                        Text("Esse anime é um bait do Boku no Hero!",
-                        style: TextStyle(fontWeight: FontWeight.w500, color: kwhite),)
+                        Comment(user: 'user', comment: 'Aquele random q n manja de nada'),
+                        Comment(user: 'IGN', comment: 'Isso ai é bait!'),
                       ],
                     ),
                   ),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: kdarkGrey),
                 ),
               ),
             ],

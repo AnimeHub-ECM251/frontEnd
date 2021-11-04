@@ -1,4 +1,4 @@
-import 'package:animehub/consts.dart';
+import 'package:animehub/globals/styleColors.dart';
 import 'package:flutter/material.dart';
 
 class Comment extends StatelessWidget {

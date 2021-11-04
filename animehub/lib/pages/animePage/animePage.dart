@@ -1,9 +1,14 @@
-import 'package:animehub/widgets/ButtonCard.dart';
-import 'package:animehub/widgets/Comment.dart';
-import 'package:animehub/widgets/InfoCard.dart';
-import 'package:animehub/widgets/Sinopse.dart';
+import 'dart:convert';
+
+import 'package:animehub/globals/styleText.dart';
+import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/pages/animePage/widgets/Comment.dart';
+import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
+import 'package:animehub/pages/animePage/widgets/InfoCard.dart';
+import 'package:animehub/pages/animePage/widgets/Information.dart';
+import 'package:animehub/pages/animePage/widgets/Synopsis.dart';
 import 'package:flutter/material.dart';
-import 'package:animehub/consts.dart';
+import 'package:animehub/globals/styleColors.dart';
 
 /// Template page for showing an Anime
 
@@ -14,13 +19,17 @@ class AnimePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    Map<String, dynamic> anime = jsonDecode(getAnime);
+    List<dynamic> comments = jsonDecode(getComments);
+
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: kblack),
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: kdarkGrey,
           title: Text(
-            "Boku no Pico",
+            anime['title'],
             style: kappBarTextStyle,
           ),
           centerTitle: true,
@@ -28,10 +37,10 @@ class AnimePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               /// Cartaz do Anime
               Image.network(
-                "https://www.animesgratisbr.biz/wp-content/uploads/2021/03/bokunohero5.jpg",
+                "https://http2.mlstatic.com/D_NQ_NP_753531-MLB25585825705_052017-O.jpg",
                 height: 500,
               ),
               // ButtonCard(text: "Add to favorites"),
@@ -51,8 +60,10 @@ class AnimePage extends StatelessWidget {
                 ],
               ),
 
+              Information(studio: anime['studio'], launchDate: anime['launchDate'], episodes: anime['episodes']),
+
               /// Sinopse widget
-              Synopsis(synopsis: "Aqui vai ter a parte de sinopse do recurso."),
+              Synopsis(synopsis: anime['synopsis']),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -63,9 +74,8 @@ class AnimePage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(4,4,4,0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Comment(user: 'user', comment: 'Aquele random q n manja de nada'),
-                        Comment(user: 'IGN', comment: 'Isso ai é bait!'),
+                      children: [ 
+                        for (var item in comments) Comment(user: item['idUser'].toString(), comment: item['text'])
                       ],
                     ),
                   ),

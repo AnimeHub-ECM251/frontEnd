@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:animehub/globals/styleText.dart';
@@ -13,32 +14,64 @@ import 'package:animehub/globals/styleColors.dart';
 
 /// Template page for showing an Anime
 
-class AnimePage extends StatelessWidget {
+class AnimePage extends StatefulWidget {
   const AnimePage({Key? key}) : super(key: key);
 
-  /// Request aqui e separar dados.
+  @override
+  State<AnimePage> createState() => _AnimePageState();
+}
+
+class _AnimePageState extends State<AnimePage> {
+  AnimeModel anime = AnimeModel();
+  String title = '';
+  String image = '';
+  String studio = '';
+  String synopsis = '';
+  String launchDate = '';
+  double webRating = -1;
+  double pubRating = -1;
+  int episodes = -1;
+
+  @override
+  void initState() async {
+    super.initState();
+    var data = await anime.getAnimeData('url');
+    updateUI(data);
+  }
+
+  void updateUI(dynamic animeData) {
+    if (animeData == null) {
+      title = '-';
+      image = '-';
+      studio = '-';
+      synopsis = '-';
+      launchDate = '-';
+      webRating = -1;
+      pubRating = -1;
+      episodes = 0;
+    }
+    title = animeData['title'];
+    image = animeData['image'];
+    studio = animeData['studio'];
+    synopsis = animeData['synopsis'];
+    launchDate = animeData['launchDate'];
+    webRating = animeData['webRating'];
+    pubRating = animeData['pubRating'];
+    episodes = animeData['episodes'];
+  }
+
+  // Map<String, dynamic> anime = jsonDecode(getAnime_);
+  List<dynamic> comments = jsonDecode(getComments);
 
   @override
   Widget build(BuildContext context) {
-    
-    Map<String, dynamic> anime = jsonDecode(getAnime_);
-    List<dynamic> comments = jsonDecode(getComments);
-
-    dynamic getAnime(url) async{
-      Anime aux_anime =  Anime();
-      final anime = await aux_anime.getAnimeData(url);
-      return anime;
-    }
-    
-    final anime_ =  getAnime("");
-
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: kblack),
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: kdarkGrey,
           title: Text(
-            anime['title'],
+            title,
             style: kappBarTextStyle,
           ),
           centerTitle: true,
@@ -49,7 +82,7 @@ class AnimePage extends StatelessWidget {
             children: <Widget>[
               /// Cartaz do Anime
               Image.network(
-                "https://http2.mlstatic.com/D_NQ_NP_753531-MLB25585825705_052017-O.jpg",
+                image,
                 height: 500,
               ),
               // ButtonCard(text: "Add to favorites"),
@@ -58,21 +91,24 @@ class AnimePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InfoCard(
-                    label: "Rating",
-                    info: "4.6",
+                    label: "Public Rating",
+                    info: pubRating,
                   ),
                   Padding(padding: const EdgeInsets.all(8.0)),
                   InfoCard(
-                    label: "Popularity",
-                    info: "9",
+                    label: "Web Rating",
+                    info: webRating,
                   ),
                 ],
               ),
 
-              Information(studio: anime['studio'], launchDate: anime['launchDate'], episodes: anime['episodes']),
+              Information(
+                  studio: studio,
+                  launchDate: launchDate,
+                  episodes: episodes),
 
               /// Sinopse widget
-              Synopsis(synopsis: anime['synopsis']),
+              Synopsis(synopsis: synopsis),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -80,11 +116,14 @@ class AnimePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(3),
                       color: klightGrey),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4,4,4,0),
+                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [ 
-                        for (var item in comments) Comment(user: item['idUser'].toString(), comment: item['text'])
+                      children: [
+                        for (var item in comments)
+                          Comment(
+                              user: item['idUser'].toString(),
+                              comment: item['text'])
                       ],
                     ),
                   ),

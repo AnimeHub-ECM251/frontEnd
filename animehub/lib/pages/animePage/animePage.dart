@@ -42,7 +42,7 @@ class _AnimePageState extends State<AnimePage> {
 
 
   void updateUI() async {
-    var animeData =  await anime.getAnimeData('https://animehubteste.free.beeceptor.com/anime/1');
+    var animeData =  await anime.getAnimeData('https://animehubteste2.free.beeceptor.com/anime/1');
     setState(() {
       if (animeData == null) {
       title = '-';

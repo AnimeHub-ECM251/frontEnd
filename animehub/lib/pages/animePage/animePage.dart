@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/pages/animePage/classes/anime.dart';
 import 'package:animehub/pages/animePage/widgets/Comment.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
 import 'package:animehub/pages/animePage/widgets/InfoCard.dart';
@@ -20,8 +21,16 @@ class AnimePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    Map<String, dynamic> anime = jsonDecode(getAnime);
+    Map<String, dynamic> anime = jsonDecode(getAnime_);
     List<dynamic> comments = jsonDecode(getComments);
+
+    dynamic getAnime(url) async{
+      Anime aux_anime =  Anime();
+      final anime = await aux_anime.getAnimeData(url);
+      return anime;
+    }
+    
+    final anime_ =  getAnime("");
 
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: kblack),

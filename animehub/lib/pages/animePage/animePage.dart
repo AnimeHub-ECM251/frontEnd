@@ -37,8 +37,7 @@ class _AnimePageState extends State<AnimePage> {
   @override
   void initState() {
     super.initState();
-    var data = anime.getAnimeData('url');
-    updateUI(data);
+    updateUI(widget.animeData);
   }
 
   void updateUI(dynamic animeData) {

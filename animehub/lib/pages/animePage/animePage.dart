@@ -30,21 +30,19 @@ class _AnimePageState extends State<AnimePage> {
   String studio = '';
   String synopsis = '';
   String launchDate = '';
-  double webRating = -1;
-  double pubRating = -1;
-  int episodes = -1;
+  String webRating = '-1';
+  String pubRating = '-1';
+  String episodes = '-1';
 
   @override
   void initState() {
     super.initState();
-    updateUI(refreshData());
+    updateUI();
   }
 
-  dynamic refreshData() async{
-    return anime.getAnimeData('url');
-  }
 
-  void updateUI(dynamic animeData) {
+  void updateUI() async {
+    var animeData =  await anime.getAnimeData('https://animehubteste.free.beeceptor.com/anime/1');
     setState(() {
       if (animeData == null) {
       title = '-';
@@ -52,19 +50,19 @@ class _AnimePageState extends State<AnimePage> {
       studio = '-';
       synopsis = '-';
       launchDate = '-';
-      webRating = -1;
-      pubRating = -1;
-      episodes = 0;
+      webRating = '-1';
+      pubRating = '-1';
+      episodes = '0';
     }
-    title = animeData['title'];
-    image = animeData['image'];
-    studio = animeData['studio'];
-    synopsis = animeData['synopsis'];
-    launchDate = animeData['launchDate'];
-    webRating = animeData['webRating'];
-    pubRating = animeData['pubRating'];
-    episodes = animeData['episodes'];
-    
+    title = animeData['title'].toString();
+    image = animeData['image'].toString();
+    studio = animeData['studio'].toString();
+    synopsis = animeData['synopsis'].toString();
+    launchDate = animeData['launchDate'].toString();
+    webRating = animeData['websiteRating'].toString();
+    pubRating = animeData['publicRating'].toString();
+    episodes = animeData['episodes'].toString();
+    print(webRating);
     });
   }
 
@@ -113,7 +111,7 @@ class _AnimePageState extends State<AnimePage> {
               Information(
                   studio: studio,
                   launchDate: launchDate,
-                  episodes: episodes),
+                  episodes: episodes.toString()),
 
               /// Sinopse widget
               Synopsis(synopsis: synopsis),

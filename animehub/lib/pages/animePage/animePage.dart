@@ -15,7 +15,9 @@ import 'package:animehub/globals/styleColors.dart';
 /// Template page for showing an Anime
 
 class AnimePage extends StatefulWidget {
-  const AnimePage({Key? key}) : super(key: key);
+  const AnimePage({this.animeData});
+
+  final animeData;
 
   @override
   State<AnimePage> createState() => _AnimePageState();
@@ -33,9 +35,9 @@ class _AnimePageState extends State<AnimePage> {
   int episodes = -1;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    var data = await anime.getAnimeData('url');
+    var data = anime.getAnimeData('url');
     updateUI(data);
   }
 

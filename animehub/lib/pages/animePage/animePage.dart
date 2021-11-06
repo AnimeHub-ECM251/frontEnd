@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
-import 'package:animehub/pages/animePage/classes/anime.dart';
+import 'package:animehub/pages/animePage/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/Comment.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
 import 'package:animehub/pages/animePage/widgets/InfoCard.dart';
@@ -23,7 +23,7 @@ class AnimePage extends StatefulWidget {
 }
 
 class _AnimePageState extends State<AnimePage> {
-  AnimeModel anime = AnimeModel();
+  Controller controller = Controller();
   String title = '';
   String image = '';
   String studio = '';
@@ -39,29 +39,40 @@ class _AnimePageState extends State<AnimePage> {
     updateUI();
   }
 
+  bool verify(str) {
+    print(str == '-1');
+    if (str == '-1.0') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   void updateUI() async {
-    var animeData =  await anime.getAnimeData('https://animehubteste2.free.beeceptor.com/anime/1');
+    var animeData = await controller.getData('http://localhost:8081/anime/2');
+    var commentData =
+        await controller.getData('http://localhost:8081/comentarios/2');
     setState(() {
       if (animeData == null) {
-      title = '-';
-      image = '-';
-      studio = '-';
-      synopsis = '-';
-      launchDate = '-';
-      webRating = '-1';
-      pubRating = '-1';
-      episodes = '0';
-    }
-    title = animeData['title'].toString();
-    image = animeData['image'].toString();
-    studio = animeData['studio'].toString();
-    synopsis = animeData['synopsis'].toString();
-    launchDate = animeData['launchDate'].toString();
-    webRating = animeData['websiteRating'].toString();
-    pubRating = animeData['publicRating'].toString();
-    episodes = animeData['episodes'].toString();
-    print(webRating);
+        title = '-';
+        image = '-';
+        studio = '-';
+        synopsis = '-';
+        launchDate = '-';
+        webRating = '-1';
+        pubRating = '-1';
+        episodes = '0';
+      }
+      title = animeData['title'].toString();
+      image = animeData['image'].toString();
+      studio = animeData['studio'].toString();
+      synopsis = animeData['synopsis'].toString();
+      launchDate = animeData['launchDate'].toString();
+      webRating = animeData['websiteRating'].toString();
+      pubRating = animeData['publicRating'].toString();
+      episodes = animeData['episodes'].toString();
+
+      comments = List.castFrom(commentData);
     });
   }
 
@@ -97,12 +108,12 @@ class _AnimePageState extends State<AnimePage> {
                 children: [
                   InfoCard(
                     label: "Public Rating",
-                    info: pubRating,
+                    info: verify(pubRating) ?  '?' : pubRating,
                   ),
                   Padding(padding: const EdgeInsets.all(8.0)),
                   InfoCard(
                     label: "Web Rating",
-                    info: webRating,
+                    info: verify(webRating) ?  '?' : webRating,
                   ),
                 ],
               ),

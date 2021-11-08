@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/pages/animePage/CommentPage.dart';
 import 'package:animehub/pages/animePage/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/Comment.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
+import 'package:animehub/pages/animePage/widgets/CommentList.dart';
 import 'package:animehub/pages/animePage/widgets/InfoCard.dart';
 import 'package:animehub/pages/animePage/widgets/Information.dart';
 import 'package:animehub/pages/animePage/widgets/Synopsis.dart';
+import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/globals/styleColors.dart';
 
@@ -40,7 +43,6 @@ class _AnimePageState extends State<AnimePage> {
   }
 
   bool verify(str) {
-    print(str == '-1');
     if (str == '-1.0') {
       return true;
     } else {
@@ -49,9 +51,10 @@ class _AnimePageState extends State<AnimePage> {
   }
 
   void updateUI() async {
-    var animeData = await controller.getData('http://localhost:8081/anime/2');
-    var commentData =
-        await controller.getData('http://localhost:8081/comentarios/2');
+    var animeData = await controller
+        .getData('https://animehubteste2.free.beeceptor.com/anime/1');
+    // var commentData =
+    // await controller.getData('http://localhost:8081/comentarios/2');
     setState(() {
       if (animeData == null) {
         title = '-';
@@ -72,7 +75,7 @@ class _AnimePageState extends State<AnimePage> {
       pubRating = animeData['publicRating'].toString();
       episodes = animeData['episodes'].toString();
 
-      comments = List.castFrom(commentData);
+      // comments = List.castFrom(commentData);
     });
   }
 
@@ -81,9 +84,7 @@ class _AnimePageState extends State<AnimePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: kblack),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: kdarkGrey,
           title: Text(
@@ -108,12 +109,12 @@ class _AnimePageState extends State<AnimePage> {
                 children: [
                   InfoCard(
                     label: "Public Rating",
-                    info: verify(pubRating) ?  '?' : pubRating,
+                    info: verify(pubRating) ? '?' : pubRating,
                   ),
                   Padding(padding: const EdgeInsets.all(8.0)),
                   InfoCard(
                     label: "Web Rating",
-                    info: verify(webRating) ?  '?' : webRating,
+                    info: verify(webRating) ? '?' : webRating,
                   ),
                 ],
               ),
@@ -125,30 +126,34 @@ class _AnimePageState extends State<AnimePage> {
 
               /// Sinopse widget
               Synopsis(synopsis: synopsis),
+
+              CommentList(
+                comments: comments,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: klightGrey),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        for (var item in comments)
-                          Comment(
-                              user: item['idUser'].toString(),
-                              comment: item['text'])
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                child: ElevatedButton(
+                    onPressed: () async{
+                      var newComment = await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return CommentPage();
+                          }),
+                      );
+                      print(newComment);
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(kdarkGrey)),
+                    child: Text(
+                      'Add comment',
+                      textAlign: TextAlign.center,
+                      style: kbuttonCardTextStyle,
+                    )),
+              )
             ],
           ),
         ),
-      ),
     );
   }
 }

@@ -2,21 +2,22 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/networking.dart';
 import 'package:animehub/pages/animePage/CommentPage.dart';
 import 'package:animehub/pages/animePage/classes/controller.dart';
-import 'package:animehub/pages/animePage/widgets/Comment.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
 import 'package:animehub/pages/animePage/widgets/CommentList.dart';
 import 'package:animehub/pages/animePage/widgets/InfoCard.dart';
 import 'package:animehub/pages/animePage/widgets/Information.dart';
 import 'package:animehub/pages/animePage/widgets/Synopsis.dart';
-import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/globals/styleColors.dart';
 
 /// Template page for showing an Anime
 
 class AnimePage extends StatefulWidget {
+  //TODO: Informações necessárias para usar aqui nos get e posts.
+  // "IdAnime" , "IdUser"
   const AnimePage({this.animeData});
 
   final animeData;
@@ -35,6 +36,9 @@ class _AnimePageState extends State<AnimePage> {
   String webRating = '-1';
   String pubRating = '-1';
   String episodes = '-1';
+  String genre = '';
+  String userID = '1';
+  var comments;
 
   @override
   void initState() {
@@ -51,10 +55,8 @@ class _AnimePageState extends State<AnimePage> {
   }
 
   void updateUI() async {
-    var animeData = await controller
-        .getData('https://animehubteste2.free.beeceptor.com/anime/1');
-    // var commentData =
-    // await controller.getData('http://localhost:8081/comentarios/2');
+    var animeData = await controller.getData('http://localhost:8081/', 'anime/1');
+    var commentData = await controller.getData('http://localhost:8081/', 'comentarios/2');
     setState(() {
       if (animeData == null) {
         title = '-';
@@ -65,6 +67,7 @@ class _AnimePageState extends State<AnimePage> {
         webRating = '-1';
         pubRating = '-1';
         episodes = '0';
+        genre = '-';
       }
       title = animeData['title'].toString();
       image = animeData['image'].toString();
@@ -74,13 +77,12 @@ class _AnimePageState extends State<AnimePage> {
       webRating = animeData['websiteRating'].toString();
       pubRating = animeData['publicRating'].toString();
       episodes = animeData['episodes'].toString();
-
-      // comments = List.castFrom(commentData);
+      comments = commentData;
     });
   }
 
   // Map<String, dynamic> anime = jsonDecode(getAnime_);
-  List<dynamic> comments = jsonDecode(getComments);
+  // List<dynamic> comments = jsonDecode(getComments);
 
   @override
   Widget build(BuildContext context) {
@@ -134,21 +136,26 @@ class _AnimePageState extends State<AnimePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () async{
-                      var newComment = await Navigator.push(
+                      var text = await Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
                           return CommentPage();
                           }),
                       );
-                      print(newComment);
+                      //TODO: POST do comentário. Infos TUDO EM STRING: "text" , "idUser" , "idAnime"
+                      controller.postComment('http://localhost:8081/', 'criar-comentario', text, "1", "2");
+                      setState(() {updateUI();});
                     },
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(kdarkGrey)),
-                    child: Text(
-                      'Add comment',
-                      textAlign: TextAlign.center,
-                      style: kbuttonCardTextStyle,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Add comment',
+                        textAlign: TextAlign.center,
+                        style: kbuttonCardTextStyle,
+                      ),
                     )),
               )
             ],

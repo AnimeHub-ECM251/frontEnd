@@ -27,7 +27,7 @@ class _CommentListState extends State<CommentList> {
             children: [
               for (var item in widget.comments)
                 Comment(
-                    user: item['userName'].toString(), comment: item['text'])
+                    user: item['username'].toString(), comment: item['text'])
             ],
           ),
         ),

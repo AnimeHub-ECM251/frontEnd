@@ -2,6 +2,7 @@ import 'package:animehub/globals/styleColors.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/globals/styleText.dart';
 
+/// Page for adding comments about anime
 class CommentPage extends StatelessWidget {
   const CommentPage({Key? key}) : super(key: key);
 

@@ -1,7 +1,7 @@
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
-import 'package:animehub/pages/animePage/CommentPage.dart';
-import 'package:animehub/pages/animePage/classes/controller.dart';
+import 'package:animehub/pages/commentPage/CommentPage.dart';
+import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
 import 'package:animehub/pages/animePage/widgets/CommentList.dart';
 import 'package:animehub/pages/animePage/widgets/InfoCard.dart';

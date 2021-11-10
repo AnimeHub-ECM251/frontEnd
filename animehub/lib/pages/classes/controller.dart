@@ -25,4 +25,16 @@ class Controller {
     return response; 
   }
 
+  /// Method to register new user
+  Future<dynamic> postRegister(String url, String endpoint, String user, String password, String email) async{
+    var json = jsonEncode(<String, String>{
+      'text': user,
+      'idUser' : password,
+      'idAnime' : email}
+    );
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var response = networkHelper.postData(endpoint, json);
+    return response; 
+  }
+
 }

@@ -3,11 +3,12 @@ import 'package:animehub/globals/styleText.dart';
 import 'package:flutter/material.dart';
 
 class ButtonCard extends StatelessWidget {
-  /// Widget to do card buttons to add to fav or watch list
-  /// 
-  /// To add must use back-end
-  ButtonCard({@required this.text});
+  /// Widget to do card buttons to add or remove to watchlist
+  /// Verification must be the boolean from is added endpoint
+  ButtonCard({@required this.text, required this.verifyInList, required this.userId});
   final text;
+  final bool verifyInList;
+  final userId;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,9 @@ class ButtonCard extends StatelessWidget {
       child: ElevatedButton(
         style:ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(kdarkGrey)),
         onPressed: () {
-          print("added");
+          //TODO POST add or remove watchlist
+
+          (userId == '-1.0') ? print('nao logou') : (verifyInList ? print("remove request") : print("add request"));
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

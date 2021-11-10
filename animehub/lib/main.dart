@@ -1,4 +1,6 @@
 import 'package:animehub/globals/styleColors.dart';
+import 'package:animehub/pages/animePage/animePage.dart';
+import 'package:animehub/pages/registerPage/registerPage.dart';
 import 'package:animehub/pages/mainPage/mainPage.dart';
 import 'package:flutter/material.dart';
 

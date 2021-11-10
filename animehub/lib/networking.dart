@@ -6,6 +6,7 @@ class NetworkHelper {
 
   final String urlBase;
 
+  /// Request to get data
   Future getData(String endpoint) async{
     http.Response response = await http.get(Uri.parse(urlBase+endpoint));
     
@@ -19,8 +20,9 @@ class NetworkHelper {
     }
   }
 
+  /// Request to post data
   Future postData(String endpoint, var json) async{
-    print(json);
+    // print(json);
     final response = await http.post(Uri.parse(urlBase+endpoint),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -35,9 +37,4 @@ class NetworkHelper {
       return null;
     }
   }
-
-  
-
-  
-
 }

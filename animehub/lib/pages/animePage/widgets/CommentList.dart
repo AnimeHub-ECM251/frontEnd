@@ -2,6 +2,9 @@ import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/pages/animePage/widgets/Comment.dart';
 import 'package:flutter/material.dart';
 
+
+/// Widget to create a list of comments
+
 class CommentList extends StatefulWidget {
   const CommentList({@required this.comments});
   

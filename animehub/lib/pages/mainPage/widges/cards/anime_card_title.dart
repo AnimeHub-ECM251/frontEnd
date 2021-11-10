@@ -16,12 +16,17 @@ class AnimeCardTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 30,
+      height: 50,
       child: Center(
-        child: Text(
-          cardTitle,
-          style: const TextStyle(
-            color: korange,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            cardTitle,
+            style: const TextStyle(
+              color: korange,
+              fontSize: 13,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animehub/globals/styleColors.dart';
-import 'package:animehub/pages/mainPage/widges/anime_card_title.dart';
+import 'package:animehub/pages/mainPage/widges/cards/anime_card_title.dart';
 
 class AnimeCardConteiner extends StatefulWidget {
   /*############################################################################

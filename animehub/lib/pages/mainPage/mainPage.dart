@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:animehub/pages/mainPage/widges/anime_card_fill.dart';
+import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';
 
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    return HomePage(
+      currentPage: -1,
+    );
   }
 }
 
-// ignore: use_key_in_widget_constructors
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   final String logo =
       'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
+  final int currentPage;
+  const HomePage({Key? key, required this.currentPage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,17 +30,25 @@ class _HomePageState extends State<HomePage> {
               height: 80,
             ),
             onPressed: () => {
-              //TODO redirect func
+              // redirect func to main page
             },
           ),
         ),
       ),
-      body: const BodyCardFill(nCards: 10),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              BodyCardFill(
+                  nCards: 5, currentPage: (currentPage < 0) ? 0 : currentPage),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
-//TODO: MAINPAGE -> PAGES FILTER
+//TODO: PAGES LOAD MORE DATA
 //TODO: LOGIN PAGE
 //TODO: LINKAMENTO PAG
 //TODO: LINKAMENTO BACKEND

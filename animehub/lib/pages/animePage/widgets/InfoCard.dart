@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {
   /// Widget to show rankings, must give the rank label and its info.
-  ///
-  /// Info must come from back-end.
   InfoCard({@required this.label, @required this.info});
   final info;
   final label;

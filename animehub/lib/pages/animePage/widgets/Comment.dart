@@ -1,6 +1,8 @@
 import 'package:animehub/globals/styleColors.dart';
 import 'package:flutter/material.dart';
 
+/// Widget to create a comment card with user and its text
+/// 
 class Comment extends StatelessWidget {
   const Comment({@required this.user, @required this.comment});
 

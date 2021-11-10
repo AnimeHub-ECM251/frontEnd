@@ -7,6 +7,6 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(scaffoldBackgroundColor: kblack),
-    home: RegisterPage(),
+    home: AnimePage(),
   ));
 }

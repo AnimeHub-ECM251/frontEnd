@@ -29,8 +29,19 @@ class Controller {
   Future<dynamic> postRegister(String url, String endpoint, String user, String password, String email) async{
     var json = jsonEncode(<String, String>{
       'text': user,
-      'idUser' : password,
-      'idAnime' : email}
+      'password' : password,
+      'email' : email}
+    );
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var response = networkHelper.postData(endpoint, json);
+    return response; 
+  }
+
+  /// Method to add or remove from watchlist
+  Future<dynamic> postAddRmWatchlist(String url, String endpoint, String idUser, String idAnime) async{
+    var json = jsonEncode(<String, String>{
+      'idUser': idUser,
+      'idAnime' : idAnime}
     );
     NetworkHelper networkHelper = NetworkHelper(url);
     var response = networkHelper.postData(endpoint, json);

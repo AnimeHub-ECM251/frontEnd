@@ -101,6 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
+          //TODO arrumar cores dos botões
           ElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate() &&
@@ -116,6 +117,13 @@ class _RegisterPageState extends State<RegisterPage> {
               }
             },
             child: const Text('Submit'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              
+                Navigator.pop(context);
+              },
+            child: const Text('Ja tenho conta'),
           ),
         ],
       ),

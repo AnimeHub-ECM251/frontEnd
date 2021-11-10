@@ -14,23 +14,17 @@ class AnimeCardConteiner extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<AnimeCardConteiner> createState() =>
-      // ignore: no_logic_in_create_state
-      _AnimeCardState(cardImage, cardTitle);
+  State<AnimeCardConteiner> createState() => _AnimeCardState();
 }
 
 class _AnimeCardState extends State<AnimeCardConteiner> {
-  String cardImage;
-  String cardTitle;
-
-  _AnimeCardState(this.cardImage, this.cardTitle);
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: AnimeCardTitle(cardTitle: cardTitle),
+          child: AnimeCardTitle(cardTitle: widget.cardTitle),
         ),
         decoration: anime_card_image(),
         height: 450,
@@ -46,7 +40,7 @@ class _AnimeCardState extends State<AnimeCardConteiner> {
     return BoxDecoration(
       image: DecorationImage(
           image: NetworkImage(
-            cardImage,
+            widget.cardImage,
           ),
           fit: BoxFit.cover),
       boxShadow: const [

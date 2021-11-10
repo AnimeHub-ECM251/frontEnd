@@ -19,10 +19,10 @@ class AnimeCardTitle extends StatelessWidget {
       height: 50,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Text(
             cardTitle,
-            style: const TextStyle(
+            style: TextStyle(
               color: korange,
               fontSize: 13,
             ),

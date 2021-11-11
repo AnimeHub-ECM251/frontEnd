@@ -14,10 +14,9 @@ import 'package:animehub/globals/styleColors.dart';
 /// Template page for showing an Anime
 
 class AnimePage extends StatefulWidget {
-  const AnimePage({this.animeData});
-
+  const AnimePage({this.animeData, required this.animeID});
   final animeData;
-
+  final animeID;
   @override
   State<AnimePage> createState() => _AnimePageState();
 }
@@ -106,9 +105,11 @@ class _AnimePageState extends State<AnimePage> {
               image,
               height: 500,
             ),
+
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
             ButtonCard(verifyInList: isInList, userId: userID ,updateUI: updateUI,),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -124,6 +125,7 @@ class _AnimePageState extends State<AnimePage> {
               ],
             ),
             RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '-1.0',),
+
             Information(
                 studio: studio,
                 launchDate: launchDate,
@@ -138,30 +140,31 @@ class _AnimePageState extends State<AnimePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                  onPressed: () async {
-                    var text = await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return CommentPage();
-                      }),
-                    );
-                    controller.postComment('http://localhost:8081/',
-                        'criar-comentario', text, "1", "1");
-                    setState(() {
-                      updateUI();
-                    });
-                  },
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(kdarkGrey)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Add comment',
-                      textAlign: TextAlign.center,
-                      style: kbuttonCardTextStyle,
-                    ),
-                  ),),
+                onPressed: () async {
+                  var text = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return CommentPage();
+                    }),
+                  );
+                  controller.postComment('http://localhost:8081/',
+                      'criar-comentario', text, "1", "1");
+                  setState(() {
+                    updateUI();
+                  });
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(kdarkGrey)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Add comment',
+                    textAlign: TextAlign.center,
+                    style: kbuttonCardTextStyle,
+                  ),
+                ),
+              ),
             )
           ],
         ),
@@ -169,5 +172,3 @@ class _AnimePageState extends State<AnimePage> {
     );
   }
 }
-
-

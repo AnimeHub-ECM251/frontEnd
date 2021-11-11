@@ -33,7 +33,10 @@ class _AnimePageState extends State<AnimePage> {
   String episodes = '-1';
   String genre = '';
   String userID = '1';
+  var rated;
+  var rating;
   var comments;
+  var isInList = false;
 
   @override
   void initState() {
@@ -43,10 +46,14 @@ class _AnimePageState extends State<AnimePage> {
 
   /// Update the user inteface with refreshed data
   void updateUI() async {
-    var animeData = await controller.getData(
-        'http://localhost:8081/', 'anime/' + widget.animeID);
-    var commentData = await controller.getData(
-        'http://localhost:8081/', 'comentarios/' + widget.animeID);
+    var animeData =
+        await controller.getData('http://localhost:8081/', 'anime/1');
+    var commentData =
+        await controller.getData('http://localhost:8081/', 'comentarios/1');
+    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/1/1');
+    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
+    var pubRate = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
+
     setState(() {
       if (animeData == null) {
         title = '-';
@@ -68,6 +75,10 @@ class _AnimePageState extends State<AnimePage> {
       pubRating = animeData['publicRating'].toString();
       episodes = animeData['episodes'].toString();
       comments = commentData;
+      rated = votedData['rated'];
+      rating = votedData['rating'];
+      isInList = isInListData;
+      print(isInList);
     });
   }
 
@@ -97,11 +108,8 @@ class _AnimePageState extends State<AnimePage> {
 
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
-            ButtonCard(
-              text: "Add to watch list",
-              verifyInList: true,
-              userId: '-1.0',
-            ),
+            ButtonCard(verifyInList: isInList, userId: userID ,updateUI: updateUI,),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -116,11 +124,8 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(
-              rating: rating_,
-              updateUI: updateUI,
-              userId: '-1.0',
-            ),
+            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '-1.0',),
+
             Information(
                 studio: studio,
                 launchDate: launchDate,

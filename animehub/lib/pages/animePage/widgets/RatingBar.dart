@@ -1,5 +1,6 @@
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -7,10 +8,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 /// Widget to rate anime. If user already voted it's locked in the rate given.
 /// If there is no logged user can't vote
 class RateBar extends StatefulWidget {
-  const RateBar({required this.rated, required this.rating, required this.updateUI, required this.userId});
+  const RateBar({required this.rated, required this.rating, required this.updateUI, required this.userId, required this.animeId});
   final rating;
   final Function updateUI;
   final userId;
+  final animeId;
   final rated;
 
   @override
@@ -18,6 +20,7 @@ class RateBar extends StatefulWidget {
 }
 
 class _RateBarState extends State<RateBar> {
+  Controller controller = Controller();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -44,8 +47,8 @@ class _RateBarState extends State<RateBar> {
             Icons.star,
             color: widget.rated=='true' ? kwhite : korange,
           ),
-          onRatingUpdate: (value) {
-            //TODO post rating
+          onRatingUpdate: (value) async{
+            await controller.postUserRating('http://localhost:8081/', 'user-rating', widget.userId, widget.animeId, value.toString());
             rating_ = value.toString();
             print(rating_);
             setState(() {

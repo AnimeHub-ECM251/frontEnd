@@ -32,7 +32,7 @@ class _AnimePageState extends State<AnimePage> {
   String pubRating = '-1';
   String episodes = '-1';
   String genre = '';
-  String userID = '1';
+  String userID = '-1.0';
   var rated;
   var rating;
   var comments;
@@ -46,15 +46,12 @@ class _AnimePageState extends State<AnimePage> {
 
   /// Update the user inteface with refreshed data
   void updateUI() async {
-    var animeData = await controller.getData(url, 'anime/' + widget.animeID);
+    var animeData =
+        await controller.getData('http://localhost:8081/', 'anime/4');
     var commentData =
-        await controller.getData(url, 'comentarios/' + widget.animeID);
-    var votedData = await controller.getData(
-        url, 'user-rating/' + widget.animeID + '/' + widget.animeID);
-    var isInListData = await controller.getData(
-        url, 'watchlist/' + widget.animeID + '/' + widget.animeID);
-    var pubRate = await controller.getData(
-        url, 'watchlist/' + widget.animeID + '/' + widget.animeID);
+        await controller.getData('http://localhost:8081/', 'comentarios/4');
+    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/4/1');
+    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/4/1');
 
     setState(() {
       if (animeData == null) {
@@ -80,7 +77,6 @@ class _AnimePageState extends State<AnimePage> {
       rated = votedData['rated'];
       rating = votedData['rating'];
       isInList = isInListData;
-      print(isInList);
     });
   }
 
@@ -123,19 +119,14 @@ class _AnimePageState extends State<AnimePage> {
                   label: "Public Rating",
                   info: (pubRating == '-1.0') ? '?' : pubRating,
                 ),
-                Padding(padding: const EdgeInsets.all(8.0)),
                 InfoCard(
                   label: "Web Rating",
                   info: (webRating == '-1.0') ? '?' : webRating,
                 ),
               ],
             ),
-            RateBar(
-              rated: rated,
-              rating: rating,
-              updateUI: updateUI,
-              userId: '-1.0',
-            ),
+            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: '4',),
+
 
             Information(
                 studio: studio,
@@ -158,8 +149,9 @@ class _AnimePageState extends State<AnimePage> {
                       return CommentPage();
                     }),
                   );
-                  controller.postComment('http://cat-boxes.ddns.net:8081/',
-                      'criar-comentario', text, "1", "1");
+                  controller.postComment('http://localhost:8081/',
+                      'criar-comentario', text, "1", "4");
+
                   setState(() {
                     updateUI();
                   });

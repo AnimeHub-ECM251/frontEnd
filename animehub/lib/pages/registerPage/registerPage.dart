@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
+import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 
@@ -13,6 +14,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  Controller controller = Controller();
 
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
@@ -27,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Form(
             key: _formKey,
@@ -101,15 +105,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
-          //TODO arrumar cores dos botões
           ElevatedButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
             onPressed: () async {
               if (_formKey.currentState!.validate() &&
                   _formKey2.currentState!.validate() &&
                   _formKey3.currentState!.validate()) {
 
                 //TODO POST de cadastro
-
+                await controller.postRegister('http://localhost:8081/', 'cadastrar-usuario', user, password, email);
                 await ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Creating user')),
                 );
@@ -119,6 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: const Text('Submit'),
           ),
           ElevatedButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
             onPressed: () async {
               
                 Navigator.pop(context);

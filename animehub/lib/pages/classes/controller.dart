@@ -48,4 +48,14 @@ class Controller {
     return response; 
   }
 
+  Future<dynamic> postUserRating(String url, String endpoint, String idUser, String idAnime, String rating){
+    var json = jsonEncode(<String, String>{
+      'idUser': idUser,
+      'idAnime' : idAnime,
+      'rating' : rating}
+    );
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var response = networkHelper.postData(endpoint, json);
+    return response;
+  }
 }

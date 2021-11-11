@@ -28,7 +28,6 @@ class _ButtonCardState extends State<ButtonCard> {
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(kdarkGrey)),
         onPressed: () async {
-          //TODO POST add or remove watchlist
           if (widget.userId != '-1.0') {
             await controller.postAddRmWatchlist('http://localhost:8081/',
                 'anime-watchlist', '1', widget.userId);

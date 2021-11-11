@@ -24,7 +24,11 @@ class _BodyCardFillState extends State<BodyCardFill> {
   void updateUI() async {
     var animeData = await controller.getData(
         'http://cat-boxes:8081/', 'anime/' + widget.animeID);
-
+    if (animeData == null) {
+      //if the request is empy, try one more time
+      animeData = await controller.getData(
+          'http://cat-boxes:8081/', 'anime/' + widget.animeID);
+    }
     setState(() {
       if (animeData == null) {
         animeTitle = '-';
@@ -44,7 +48,11 @@ class _BodyCardFillState extends State<BodyCardFill> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AnimeCardConteiner(cardImage: animeImage, cardTitle: animeTitle),
+            AnimeCardConteiner(
+              cardImage: animeImage,
+              cardTitle: animeTitle,
+              animeID: widget.animeID,
+            ),
           ],
         ),
       ),

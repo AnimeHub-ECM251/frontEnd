@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   final String logo =
       'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
   var currentPageAux;
-  var animeIDSArray;
+  var animeIDSArray = [];
   Controller controller = Controller();
 
   @override
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              for (int i = 0; i < 5; i++)
+              for (int i = 0; i < animeIDSArray.length; i++)
                 BodyCardFill(animeID: animeIDSArray[i].toString()),
               PageBarConteiner(
                 currentPage: widget.currentPage,
@@ -84,8 +84,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-//TODO: PAGES LOAD MORE DATA
 //TODO: LOGIN PAGE
 //TODO: LINKAMENTO PAG
-//TODO: LINKAMENTO BACKEND
 //TODO: RESPONSIVIDADE COM TAMANHO DA TELA

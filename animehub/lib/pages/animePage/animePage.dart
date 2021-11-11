@@ -1,5 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
@@ -106,7 +106,11 @@ class _AnimePageState extends State<AnimePage> {
 
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
-            ButtonCard(verifyInList: isInList, userId: userID ,updateUI: updateUI,),
+            ButtonCard(
+              verifyInList: isInList,
+              userId: userID,
+              updateUI: updateUI,
+            ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -122,6 +126,7 @@ class _AnimePageState extends State<AnimePage> {
               ],
             ),
             RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: '4',),
+
 
             Information(
                 studio: studio,
@@ -146,6 +151,7 @@ class _AnimePageState extends State<AnimePage> {
                   );
                   controller.postComment('http://localhost:8081/',
                       'criar-comentario', text, "1", "4");
+
                   setState(() {
                     updateUI();
                   });

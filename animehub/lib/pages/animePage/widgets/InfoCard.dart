@@ -12,29 +12,33 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Container(
-        child: Card(
-          color: kdarkGrey,
-          elevation: 5,
-          child: Center(
-            child: Text(
-              "$label: $info",
-              textAlign: TextAlign.center,
-              style: kinfoCardTextStyle,
+      child: Expanded(
+        child: Container(
+          child: Card(
+            color: kdarkGrey,
+            elevation: 5,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "$label:\n $info",
+                  textAlign: TextAlign.center,
+                  style: kinfoCardTextStyle,
+                ),
+              ),
             ),
           ),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: klightGrey,
+                blurRadius: 3,
+                spreadRadius: -4,
+              ),
+            ],
+          ),
+          height: 80,
         ),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: klightGrey,
-              blurRadius: 3,
-              spreadRadius: -4,
-            ),
-          ],
-        ),
-        height: 100,
-        width: 150,
       ),
     );
   }

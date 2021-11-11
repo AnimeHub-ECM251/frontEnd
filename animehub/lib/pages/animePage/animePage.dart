@@ -33,7 +33,7 @@ class _AnimePageState extends State<AnimePage> {
   String pubRating = '-1';
   String episodes = '-1';
   String genre = '';
-  String userID = '1';
+  String userID = '-1.0';
   var rated;
   var rating;
   var comments;
@@ -53,7 +53,6 @@ class _AnimePageState extends State<AnimePage> {
         await controller.getData('http://localhost:8081/', 'comentarios/1');
     var votedData = await controller.getData('http://localhost:8081/', 'user-rating/1/1');
     var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
-    var pubRate = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
 
     setState(() {
       if (animeData == null) {
@@ -116,7 +115,6 @@ class _AnimePageState extends State<AnimePage> {
                   label: "Public Rating",
                   info: (pubRating == '-1.0') ? '?' : pubRating,
                 ),
-                Padding(padding: const EdgeInsets.all(8.0)),
                 InfoCard(
                   label: "Web Rating",
                   info: (webRating == '-1.0') ? '?' : webRating,
@@ -146,7 +144,7 @@ class _AnimePageState extends State<AnimePage> {
                       }),
                     );
                     controller.postComment('http://localhost:8081/',
-                        'criar-comentario', text, "1", "1");
+                        'criar-comentario', text, userID, "1");
                     setState(() {
                       updateUI();
                     });

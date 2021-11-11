@@ -47,11 +47,11 @@ class _AnimePageState extends State<AnimePage> {
   /// Update the user inteface with refreshed data
   void updateUI() async {
     var animeData =
-        await controller.getData('http://localhost:8081/', 'anime/1');
+        await controller.getData('http://localhost:8081/', 'anime/4');
     var commentData =
-        await controller.getData('http://localhost:8081/', 'comentarios/1');
-    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/1/1');
-    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
+        await controller.getData('http://localhost:8081/', 'comentarios/4');
+    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/4/1');
+    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/4/1');
 
     setState(() {
       if (animeData == null) {
@@ -77,7 +77,6 @@ class _AnimePageState extends State<AnimePage> {
       rated = votedData['rated'];
       rating = votedData['rating'];
       isInList = isInListData;
-      print(isInList);
     });
   }
 
@@ -122,7 +121,7 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '-1.0',),
+            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: '4',),
 
             Information(
                 studio: studio,
@@ -146,7 +145,7 @@ class _AnimePageState extends State<AnimePage> {
                     }),
                   );
                   controller.postComment('http://localhost:8081/',
-                      'criar-comentario', text, "1", "1");
+                      'criar-comentario', text, "1", "4");
                   setState(() {
                     updateUI();
                   });

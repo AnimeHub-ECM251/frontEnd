@@ -23,12 +23,10 @@ class _BodyCardFillState extends State<BodyCardFill> {
   }
 
   void updateUI() async {
-    var animeData = await controller.getData(
-        url, 'anime/' + widget.animeID);
+    var animeData = await controller.getData(url, 'anime/' + widget.animeID);
     if (animeData == null) {
       //if the request is empy, try one more time
-      animeData = await controller.getData(
-          url, 'anime/' + widget.animeID);
+      animeData = await controller.getData(url, 'anime/' + widget.animeID);
     }
     setState(() {
       if (animeData == null) {

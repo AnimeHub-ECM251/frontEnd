@@ -124,6 +124,7 @@ class _AnimePageState extends State<AnimePage> {
             ),
             RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: widget.animeID,),
 
+
             Information(
                 studio: studio,
                 launchDate: launchDate,

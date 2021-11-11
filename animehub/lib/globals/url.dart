@@ -1,1 +1,1 @@
-String url = 'http://cat-boxes.ddns.net:8081';
+String url = 'http://cat-boxes.ddns.net:8081/';

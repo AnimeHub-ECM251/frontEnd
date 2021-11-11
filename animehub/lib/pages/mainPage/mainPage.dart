@@ -1,3 +1,4 @@
+import 'package:animehub/globals/url.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';
@@ -35,8 +36,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void updateUI() async {
-    var animesIDS = await controller.getData('http://cat-boxes.ddns.net:8081/',
-        'todos-animes/id/' + widget.currentPage.toString());
+    var animesIDS = await controller.getData(
+        url, 'todos-animes/id/' + widget.currentPage.toString());
     setState(() {
       if (animesIDS == null) {
         animeIDSArray = [1, 2, 3, 4, 5];

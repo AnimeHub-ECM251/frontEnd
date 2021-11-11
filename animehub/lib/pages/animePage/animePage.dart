@@ -1,4 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';
@@ -47,11 +48,11 @@ class _AnimePageState extends State<AnimePage> {
   /// Update the user inteface with refreshed data
   void updateUI() async {
     var animeData =
-        await controller.getData('http://localhost:8081/', 'anime/4');
+        await controller.getData(url, 'anime/${widget.animeID}');
     var commentData =
-        await controller.getData('http://localhost:8081/', 'comentarios/4');
-    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/4/1');
-    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/4/1');
+        await controller.getData(url, 'comentarios/${widget.animeID}');
+    var votedData = await controller.getData(url, 'user-rating/${widget.animeID}/1');
+    var isInListData = await controller.getData(url, 'watchlist/${widget.animeID}/1');
 
     setState(() {
       if (animeData == null) {
@@ -106,7 +107,7 @@ class _AnimePageState extends State<AnimePage> {
 
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
-            ButtonCard(verifyInList: isInList, userId: userID ,updateUI: updateUI,),
+            ButtonCard(verifyInList: isInList, userId: userID, animeId: widget.animeID ,updateUI: updateUI,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +122,7 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: '4',),
+            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: widget.animeID,),
 
             Information(
                 studio: studio,
@@ -144,8 +145,8 @@ class _AnimePageState extends State<AnimePage> {
                       return CommentPage();
                     }),
                   );
-                  controller.postComment('http://localhost:8081/',
-                      'criar-comentario', text, "1", "4");
+                  controller.postComment(url,
+                      'criar-comentario', text, "1", widget.animeID);
                   setState(() {
                     updateUI();
                   });

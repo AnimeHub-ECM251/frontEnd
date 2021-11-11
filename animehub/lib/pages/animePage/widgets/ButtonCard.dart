@@ -1,5 +1,6 @@
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,11 @@ class ButtonCard extends StatefulWidget {
   ButtonCard(
       {required this.verifyInList,
       required this.userId,
-      required this.updateUI});
+      required this.updateUI,
+      required this.animeId});
   final verifyInList;
   final userId;
+  final animeId;
   final Function updateUI;
 
   @override
@@ -29,8 +32,8 @@ class _ButtonCardState extends State<ButtonCard> {
             backgroundColor: MaterialStateProperty.all<Color>(kdarkGrey)),
         onPressed: () async {
           if (widget.userId != '-1.0') {
-            await controller.postAddRmWatchlist('http://localhost:8081/',
-                'anime-watchlist', '1', widget.userId);
+            await controller.postAddRmWatchlist(url,
+                'anime-watchlist', widget.userId, widget.animeId);
             setState(() {
               widget.updateUI();
             });

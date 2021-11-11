@@ -1,4 +1,5 @@
 import 'package:animehub/globals/styleColors.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _RateBarState extends State<RateBar> {
             color: widget.rated=='true' ? kwhite : korange,
           ),
           onRatingUpdate: (value) async{
-            await controller.postUserRating('http://localhost:8081/', 'user-rating', widget.userId, widget.animeId, value.toString());
+            await controller.postUserRating(url, 'user-rating', widget.userId, widget.animeId, value.toString());
             rating_ = value.toString();
             print(rating_);
             setState(() {

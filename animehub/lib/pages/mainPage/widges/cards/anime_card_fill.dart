@@ -1,3 +1,4 @@
+import 'package:animehub/globals/url.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_conteiner.dart';
@@ -23,11 +24,11 @@ class _BodyCardFillState extends State<BodyCardFill> {
 
   void updateUI() async {
     var animeData = await controller.getData(
-        'http://cat-boxes:8081/', 'anime/' + widget.animeID);
+        url, 'anime/' + widget.animeID);
     if (animeData == null) {
       //if the request is empy, try one more time
       animeData = await controller.getData(
-          'http://cat-boxes:8081/', 'anime/' + widget.animeID);
+          url, 'anime/' + widget.animeID);
     }
     setState(() {
       if (animeData == null) {

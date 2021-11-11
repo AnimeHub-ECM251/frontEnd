@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
@@ -112,8 +113,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   _formKey2.currentState!.validate() &&
                   _formKey3.currentState!.validate()) {
 
-                //TODO POST de cadastro
-                await controller.postRegister('http://localhost:8081/', 'cadastrar-usuario', user, password, email);
+                //TODO verificar POST de cadastro
+                await controller.postRegister(url, 'cadastrar-usuario', user, password, email);
                 await ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Creating user')),
                 );

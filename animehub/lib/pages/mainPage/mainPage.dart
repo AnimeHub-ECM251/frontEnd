@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void updateUI() async {
-    var animesIDS = await controller.getData('http://cat-boxes:8081/',
+    var animesIDS = await controller.getData('http://cat-boxes.ddns.net:8081/',
         'todos-animes/id/' + widget.currentPage.toString());
     setState(() {
       if (animesIDS == null) {

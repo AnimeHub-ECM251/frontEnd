@@ -1,5 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/mock/dataAnimePage.dart';
+import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
@@ -46,13 +46,15 @@ class _AnimePageState extends State<AnimePage> {
 
   /// Update the user inteface with refreshed data
   void updateUI() async {
-    var animeData =
-        await controller.getData('http://localhost:8081/', 'anime/1');
+    var animeData = await controller.getData(url, 'anime/' + widget.animeID);
     var commentData =
-        await controller.getData('http://localhost:8081/', 'comentarios/1');
-    var votedData = await controller.getData('http://localhost:8081/', 'user-rating/1/1');
-    var isInListData = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
-    var pubRate = await controller.getData('http://localhost:8081/', 'watchlist/1/1');
+        await controller.getData(url, 'comentarios/' + widget.animeID);
+    var votedData = await controller.getData(
+        url, 'user-rating/' + widget.animeID + '/' + widget.animeID);
+    var isInListData = await controller.getData(
+        url, 'watchlist/' + widget.animeID + '/' + widget.animeID);
+    var pubRate = await controller.getData(
+        url, 'watchlist/' + widget.animeID + '/' + widget.animeID);
 
     setState(() {
       if (animeData == null) {
@@ -108,7 +110,11 @@ class _AnimePageState extends State<AnimePage> {
 
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
-            ButtonCard(verifyInList: isInList, userId: userID ,updateUI: updateUI,),
+            ButtonCard(
+              verifyInList: isInList,
+              userId: userID,
+              updateUI: updateUI,
+            ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +130,12 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '-1.0',),
+            RateBar(
+              rated: rated,
+              rating: rating,
+              updateUI: updateUI,
+              userId: '-1.0',
+            ),
 
             Information(
                 studio: studio,
@@ -147,7 +158,7 @@ class _AnimePageState extends State<AnimePage> {
                       return CommentPage();
                     }),
                   );
-                  controller.postComment('http://localhost:8081/',
+                  controller.postComment('http://cat-boxes.ddns.net:8081/',
                       'criar-comentario', text, "1", "1");
                   setState(() {
                     updateUI();

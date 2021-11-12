@@ -43,7 +43,7 @@ class _RateBarState extends State<RateBar> {
           direction: Axis.horizontal,
           itemCount: 5,
           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-          ignoreGestures: (widget.rated=='true' || widget.userId == '-1.0'),
+          ignoreGestures: (widget.rated=='true' || widget.userId == '-1'),
           itemBuilder: (context, _) => Icon(
             Icons.star,
             color: widget.rated=='true' ? kwhite : korange,

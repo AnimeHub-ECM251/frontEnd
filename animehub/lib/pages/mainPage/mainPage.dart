@@ -1,4 +1,5 @@
 import 'package:animehub/globals/url.dart';
+import 'package:animehub/pages/LoginPage/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';
@@ -15,7 +16,10 @@ class MainPage extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  //var
   final int currentPage;
+
+  //constructor
   const HomePage({Key? key, required this.currentPage}) : super(key: key);
 
   @override
@@ -23,12 +27,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Vars to request and feed the page widget
   final String logo =
       'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
   var currentPageAux;
   var animeIDSArray = [];
   Controller controller = Controller();
 
+  /*##########################################################################################
+  #                                    Request Code                                          #
+  ##########################################################################################*/
   @override
   void initState() {
     super.initState();
@@ -40,15 +48,20 @@ class _HomePageState extends State<HomePage> {
         url, 'todos-animes/id/' + widget.currentPage.toString());
     setState(() {
       if (animesIDS == null) {
+        // return page 1 data
         animeIDSArray = [1, 2, 3, 4, 5];
         currentPageAux = animesIDS[4].toString();
       } else {
+        // get page requested
         currentPageAux = animesIDS[4].toString();
         animeIDSArray = animesIDS;
       }
     });
   }
 
+  /*##########################################################################################
+  #                                    Widget Code                                           #
+  ##########################################################################################*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,17 +76,37 @@ class _HomePageState extends State<HomePage> {
               height: 80,
             ),
             onPressed: () => {
-              // redirect func to main page
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage(currentPage: 1),
+                ),
+                (route) => false,
+              ),
             },
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return LoginPage();
+                  }),
+                );
+              },
+              icon: Icon(Icons.account_circle))
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // Reder number of cards in request respons (1~5)
               for (int i = 0; i < animeIDSArray.length; i++)
                 BodyCardFill(animeID: animeIDSArray[i].toString()),
+              // After render the cards render the pags bar
               PageBarConteiner(
                 currentPage: widget.currentPage,
               ),
@@ -86,5 +119,4 @@ class _HomePageState extends State<HomePage> {
 }
 
 //TODO: LOGIN PAGE
-//TODO: LINKAMENTO PAG
 //TODO: RESPONSIVIDADE COM TAMANHO DA TELA

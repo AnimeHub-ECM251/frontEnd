@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
     return Center(
       child: Container(
         child: Column(
-          children: [],
+          children: [Text('LoginPage')],
         ),
       ),
     );

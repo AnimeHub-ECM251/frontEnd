@@ -33,7 +33,7 @@ class _AnimePageState extends State<AnimePage> {
   String pubRating = '-1';
   String episodes = '-1';
   String genre = '';
-  String userID = '-1.0';
+  String userID = '-1';
   var rated;
   var rating;
   var comments;
@@ -51,8 +51,19 @@ class _AnimePageState extends State<AnimePage> {
         await controller.getData(url, 'anime/${widget.animeID}');
     var commentData =
         await controller.getData(url, 'comentarios/${widget.animeID}');
-    var votedData = await controller.getData(url, 'user-rating/${widget.animeID}/1');
-    var isInListData = await controller.getData(url, 'watchlist/${widget.animeID}/1');
+    // TODO tratar erro de não logado try catch;
+    try {
+      var votedData = await controller.getData(url, 'user-rating/${widget.animeID}/${userID}');
+      var isInListData = await controller.getData(url, 'watchlist/${widget.animeID}/${userID}');
+      rated = votedData['rated'];
+      rating = votedData['rating'];
+      isInList = isInListData;
+    } catch (e) {
+      rating = '0';
+      rated = false;
+    }
+    
+    
 
     setState(() {
       if (animeData == null) {
@@ -75,9 +86,6 @@ class _AnimePageState extends State<AnimePage> {
       pubRating = animeData['publicRating'].toString();
       episodes = animeData['episodes'].toString();
       comments = commentData;
-      rated = votedData['rated'];
-      rating = votedData['rating'];
-      isInList = isInListData;
     });
   }
 
@@ -122,7 +130,7 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: '1', animeId: widget.animeID,),
+            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: userID, animeId: widget.animeID,),
 
 
             Information(
@@ -147,7 +155,7 @@ class _AnimePageState extends State<AnimePage> {
                     }),
                   );
                   controller.postComment(url,
-                      'criar-comentario', text, "1", widget.animeID);
+                      'criar-comentario', text, userID, widget.animeID);
                   setState(() {
                     updateUI();
                   });

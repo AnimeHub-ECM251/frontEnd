@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return RegisterPage();
+                          return LoginPage();
                         },
                       ),
                     ),
@@ -107,7 +107,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               // Reder number of cards in request respons (1~5)
-              Text(animeIDSArray.length.toString()),
               for (int i = 0; i < animeIDSArray.length; i++)
                 BodyCardFill(animeID: animeIDSArray[i].toString()),
               // After render the cards render the pags bar

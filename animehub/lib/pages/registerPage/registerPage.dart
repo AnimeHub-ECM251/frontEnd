@@ -4,6 +4,7 @@ import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/classes/controller.dart';
+import 'package:animehub/pages/mainPage/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 
@@ -15,6 +16,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final String logo =
+      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
 
   Controller controller = Controller();
 
@@ -29,6 +32,26 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kblack,
+        title: Center(
+          child: TextButton(
+            child: Image.network(
+              logo,
+              width: 120,
+              height: 80,
+            ),
+            onPressed: () => {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage(currentPage: 1),
+                ),
+                (route) => false,
+              ),
+            },
+          ),
+         )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

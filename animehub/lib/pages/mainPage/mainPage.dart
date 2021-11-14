@@ -1,5 +1,6 @@
 import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/LoginPage/LoginPage.dart';
+import 'package:animehub/pages/registerPage/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         currentPageAux = animesIDS[4].toString();
       } else {
         // get page requested
-        currentPageAux = animesIDS[4].toString();
+        currentPageAux = animesIDS[animesIDS.length - 1].toString();
         animeIDSArray = animesIDS;
       }
     });
@@ -88,14 +89,16 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return LoginPage();
-                  }),
-                );
-              },
+              onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return RegisterPage();
+                        },
+                      ),
+                    ),
+                  },
               icon: Icon(Icons.account_circle))
         ],
       ),
@@ -104,6 +107,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               // Reder number of cards in request respons (1~5)
+              Text(animeIDSArray.length.toString()),
               for (int i = 0; i < animeIDSArray.length; i++)
                 BodyCardFill(animeID: animeIDSArray[i].toString()),
               // After render the cards render the pags bar

@@ -33,25 +33,25 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kblack,
-        title: Center(
-          child: TextButton(
-            child: Image.network(
-              logo,
-              width: 120,
-              height: 80,
-            ),
-            onPressed: () => {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage(currentPage: 1),
-                ),
-                (route) => false,
+          backgroundColor: kblack,
+          title: Center(
+            child: TextButton(
+              child: Image.network(
+                logo,
+                width: 120,
+                height: 80,
               ),
-            },
-          ),
-         )),
+              onPressed: () => {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomePage(currentPage: 1),
+                  ),
+                  (route) => false,
+                ),
+              },
+            ),
+          )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,6 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Container(
                 color: kdarkGrey,
                 child: TextFormField(
+                  obscureText: true,
                   decoration: InputDecoration(
                       labelStyle: kinfoCardTextStyle, labelText: 'password'),
                   style: kbuttonCardTextStyle,
@@ -95,12 +96,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                     return null;
                   },
-                   onChanged: (value) {
-                     // Encoding password
-                     var bytes = utf8.encode(value);
-                     var digest = sha256.convert(bytes);
-                     password = digest.toString();
-                     print(password);
+                  onChanged: (value) {
+                    // Encoding password
+                    var bytes = utf8.encode(value);
+                    var digest = sha256.convert(bytes);
+                    password = digest.toString();
+                    print(password);
                   },
                 ),
               ),
@@ -122,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                     return null;
                   },
-                   onChanged: (value) {
+                  onChanged: (value) {
                     email = value;
                   },
                 ),
@@ -130,14 +131,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(korange)),
             onPressed: () async {
               if (_formKey.currentState!.validate() &&
                   _formKey2.currentState!.validate() &&
                   _formKey3.currentState!.validate()) {
-
                 //TODO verificar POST de cadastro
-                await controller.postRegister(url, 'cadastrar-usuario', user, password, email);
+                await controller.postRegister(
+                    url, 'cadastrar-usuario', user, password, email);
                 await ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Creating user')),
                 );
@@ -147,11 +149,11 @@ class _RegisterPageState extends State<RegisterPage> {
             child: const Text('Submit'),
           ),
           ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(korange)),
             onPressed: () async {
-              
-                Navigator.pop(context);
-              },
+              Navigator.pop(context);
+            },
             child: const Text('Ja tenho conta'),
           ),
         ],

@@ -24,7 +24,7 @@ class Controller {
   Future<dynamic> postRegister(String url, String endpoint, String user,
       String password, String email) async {
     var json = jsonEncode(
-        <String, String>{'text': user, 'password': password, 'email': email});
+        <String, String>{'login': user, 'password': password, 'email': email});
     NetworkHelper networkHelper = NetworkHelper(url);
     var response = networkHelper.postData(endpoint, json);
     return response;
@@ -33,7 +33,8 @@ class Controller {
   /// Method to register new user
   Future<dynamic> postLogin(
       String url, String endpoint, String user, String password) async {
-    var json = jsonEncode(<String, String>{'text': user, 'password': password});
+    var json =
+        jsonEncode(<String, String>{'login': user, 'password': password});
     NetworkHelper networkHelper = NetworkHelper(url);
     var response = networkHelper.postData(endpoint, json);
     return response;

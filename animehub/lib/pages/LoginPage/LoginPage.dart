@@ -4,8 +4,10 @@ import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/globals/url.dart';
 import 'package:animehub/pages/classes/controller.dart';
+import 'package:animehub/pages/LoginPage/widgets/login_title.dart';
 import 'package:animehub/pages/registerPage/registerPage.dart';
 import 'package:animehub/pages/mainPage/mainPage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 
@@ -17,8 +19,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final String logo =
-      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
   Controller controller = Controller();
 
   final _formKey = GlobalKey<FormState>();
@@ -26,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
 
   String user = '';
   String password = '';
-
+  String logo =
+      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,18 +57,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 32),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    color: korange,
-                    fontSize: 28,
-                  ),
-                ),
-              ),
-            ),
+            PageTitle(),
             /*###################################################
             #                      INPUTS                       #
             ###################################################*/
@@ -80,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                         fillColor: Colors.white,
                         labelStyle: kinfoCardTextStyle,
-                        labelText: 'Userpass'),
+                        labelText: 'Username'),
                     style: kbuttonCardTextStyle,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -101,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
                   child: TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                         fillColor: Colors.white,
                         labelStyle: kinfoCardTextStyle,
@@ -149,9 +140,9 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate() &&
                             _formKey2.currentState!.validate()) {
                           await controller.postLogin(
-                              url, 'cadastrar-usuario', user, password);
+                              url, 'logar-usuario', user, password);
                           await ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Creating user')),
+                            const SnackBar(content: Text('login user')),
                           );
                           Navigator.pop(context);
                         }
@@ -199,4 +190,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-//TODO: fazer widget

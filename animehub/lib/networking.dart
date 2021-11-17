@@ -26,6 +26,7 @@ class NetworkHelper {
     final response = await http.post(Uri.parse(urlBase+endpoint),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
     },
     body: json);
     if (response != 400){

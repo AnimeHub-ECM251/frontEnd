@@ -56,12 +56,26 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 32),
+              child: Text(
+                'Cadastrar',
+                style: TextStyle(
+                  color: korange,
+                  fontSize: 28,
+                ),
+              ),
+            ),
+          ),
+          /*###################################################
+          #                      INPUTS                       #
+          ###################################################*/
           Form(
             key: _formKey,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                color: kdarkGrey,
                 child: TextFormField(
                   decoration: InputDecoration(
                       labelStyle: kinfoCardTextStyle, labelText: 'username'),
@@ -84,7 +98,6 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                color: kdarkGrey,
                 child: TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
@@ -101,7 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     var bytes = utf8.encode(value);
                     var digest = sha256.convert(bytes);
                     password = digest.toString();
-                    print(password);
                   },
                 ),
               ),
@@ -112,7 +124,6 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                color: kdarkGrey,
                 child: TextFormField(
                   decoration: InputDecoration(
                       labelStyle: kinfoCardTextStyle, labelText: 'email'),
@@ -130,31 +141,71 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
-          ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(korange)),
-            onPressed: () async {
-              if (_formKey.currentState!.validate() &&
-                  _formKey2.currentState!.validate() &&
-                  _formKey3.currentState!.validate()) {
-                //TODO verificar POST de cadastro
-                await controller.postRegister(
-                    url, 'cadastrar-usuario', user, password, email);
-                await ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Creating user')),
-                );
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Submit'),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(korange)),
-            onPressed: () async {
-              Navigator.pop(context);
-            },
-            child: const Text('Ja tenho conta'),
+          /*###################################################
+          #                       BTNS                        #
+          ###################################################*/
+          Padding(
+            padding: const EdgeInsets.only(top: 60.0, left: 24, right: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /*###################################################
+                #                     BTN Cadastrar                 #
+                ###################################################*/
+                SizedBox(
+                  width: 450,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: korange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate() &&
+                          _formKey2.currentState!.validate() &&
+                          _formKey3.currentState!.validate()) {
+                        await controller.postRegister(
+                            url, 'cadastrar-usuario', user, password, email);
+                        await ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Creating user')),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                /*###################################################
+                #                    BTN  Login                     #
+                ###################################################*/
+                SizedBox(
+                  width: 450,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: kdarkGrey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Já tenho conta'),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),

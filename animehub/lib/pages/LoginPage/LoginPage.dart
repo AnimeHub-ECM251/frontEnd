@@ -108,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                       var bytes = utf8.encode(value);
                       var digest = sha256.convert(bytes);
                       password = digest.toString();
-                      print(password);
                     },
                   ),
                 ),
@@ -148,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                       child: const Text(
-                        'Submit',
+                        'Login',
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -167,9 +166,11 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                     child: ElevatedButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: kdarkGrey,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+                        backgroundColor: kdarkGrey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.push(
                           context,

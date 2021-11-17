@@ -51,7 +51,6 @@ class _AnimePageState extends State<AnimePage> {
         await controller.getData(url, 'anime/${widget.animeID}');
     var commentData =
         await controller.getData(url, 'comentarios/${widget.animeID}');
-    // TODO tratar erro de não logado try catch;
     try {
       var votedData = await controller.getData(url, 'user-rating/${widget.animeID}/${userID}');
       var isInListData = await controller.getData(url, 'watchlist/${widget.animeID}/${userID}');

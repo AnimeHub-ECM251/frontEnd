@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-
+  bool _isObscure = true;
   String user = '';
   String password = '';
   String logo =
@@ -66,11 +66,10 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
+                  width: 500,
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        labelStyle: kinfoCardTextStyle,
-                        labelText: 'Username'),
+                        labelStyle: kinfoCardTextStyle, labelText: 'Username'),
                     style: kbuttonCardTextStyle,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -90,12 +89,25 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
+                  width: 500,
                   child: TextFormField(
-                    obscureText: true,
+                    obscureText: _isObscure,
                     decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        labelStyle: kinfoCardTextStyle,
-                        labelText: 'Password'),
+                      focusColor: kwhite,
+                      labelStyle: kinfoCardTextStyle,
+                      labelText: 'password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          color: kwhite,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                    ),
                     style: kbuttonCardTextStyle,
                     validator: (value) {
                       if (value == null || value.isEmpty) {

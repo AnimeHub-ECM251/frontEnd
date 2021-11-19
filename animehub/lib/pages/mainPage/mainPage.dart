@@ -46,10 +46,13 @@ class _HomePageState extends State<HomePage> {
   void updateUI() async {
     var animesIDS = await controller.getData(
         url, 'todos-animes/id/' + widget.currentPage.toString());
-    if (animesIDS == null) { //try one time
+    if (animesIDS == null) {
+      //try one time
       animesIDS = await controller.getData(
           url, 'todos-animes/id/' + widget.currentPage.toString());
-    }if (animesIDS == null) { //try last time
+    }
+    if (animesIDS == null) {
+      //try last time
       animesIDS = await controller.getData(
           url, 'todos-animes/id/' + widget.currentPage.toString());
     }
@@ -107,6 +110,32 @@ class _HomePageState extends State<HomePage> {
                   },
               icon: Icon(Icons.account_circle))
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: kdarkGrey,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: korange),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home,
+                size: 40,
+              ),
+              title: Text('Minha conta'),
+              onTap: () {
+                //TODO: pag do user
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(

@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String user = '';
   String password = '';
   String email = '';
-
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Form(
             key: _formKey,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
                 child: TextFormField(
                   decoration: InputDecoration(
@@ -96,12 +96,25 @@ class _RegisterPageState extends State<RegisterPage> {
           Form(
             key: _formKey2,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: _isObscure,
                   decoration: InputDecoration(
-                      labelStyle: kinfoCardTextStyle, labelText: 'password'),
+                    labelStyle: kinfoCardTextStyle,
+                    labelText: 'password',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
+                  ),
                   style: kbuttonCardTextStyle,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -122,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Form(
             key: _formKey3,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
                 child: TextFormField(
                   decoration: InputDecoration(

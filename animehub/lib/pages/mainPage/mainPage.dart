@@ -111,6 +111,9 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.account_circle))
         ],
       ),
+      /*##########################################################################################
+      #                                      Menu Code                                           #
+      ##########################################################################################*/
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,

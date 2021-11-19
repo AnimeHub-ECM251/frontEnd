@@ -6,14 +6,16 @@ class PageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 32),
-        child: Text(
-          'Login',
-          style: TextStyle(
-            color: korange,
-            fontSize: 28,
+    return SingleChildScrollView(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 32),
+          child: Text(
+            'Login',
+            style: TextStyle(
+              color: korange,
+              fontSize: 28,
+            ),
           ),
         ),
       ),

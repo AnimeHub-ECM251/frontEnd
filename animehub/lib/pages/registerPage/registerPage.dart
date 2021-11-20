@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/mainPage/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +16,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final String logo =
-      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
-
   Controller controller = Controller();
 
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   final _formKey3 = GlobalKey<FormState>();
-
+  String respLogin = '';
   String user = '';
   String password = '';
   String email = '';
@@ -182,8 +179,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             _formKey3.currentState!.validate()) {
                           await controller.postRegister(
                               url, 'cadastrar-usuario', user, password, email);
-                          await ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Creating user')),
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(respLogin != '-1'
+                                    ? 'login sucessfull'
+                                    : 'Login faild')),
                           );
                           Navigator.pop(context);
                         }

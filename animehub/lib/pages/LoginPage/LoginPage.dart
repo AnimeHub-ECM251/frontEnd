@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/LoginPage/widgets/login_title.dart';
 import 'package:animehub/pages/registerPage/registerPage.dart';
@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   bool _isObscure = true;
+  String respLogin = '';
   String user = '';
   String password = '';
   String logo =
@@ -154,12 +155,17 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate() &&
                               _formKey2.currentState!.validate()) {
-                            await controller.postLogin(
+                            respLogin = await controller.postLogin(
                                 url, 'logar-usuario', user, password);
-                            await ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('login user')),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(respLogin != '-1'
+                                      ? 'login sucessfull'
+                                      : 'Login faild')),
                             );
                             Navigator.pop(context);
+                            //TODO:VOLTAR PARA MAIN COM USER
+
                           }
                         },
                         child: const Text(

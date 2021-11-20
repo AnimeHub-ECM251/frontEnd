@@ -1,4 +1,4 @@
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/pages/LoginPage/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
@@ -28,8 +28,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Vars to request and feed the page widget
-  final String logo =
-      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
   var currentPageAux;
   var animeIDSArray = [];
   Controller controller = Controller();

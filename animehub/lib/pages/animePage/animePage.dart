@@ -1,5 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';

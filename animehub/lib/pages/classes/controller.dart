@@ -50,6 +50,7 @@ class Controller {
     return response;
   }
 
+  /// Method to add User rating
   Future<dynamic> postUserRating(String url, String endpoint, String idUser,
       String idAnime, String rating) {
     var json = jsonEncode(<String, String>{

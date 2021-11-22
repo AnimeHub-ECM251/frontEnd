@@ -27,11 +27,13 @@ class _LoginPageState extends State<LoginPage> {
   String respLogin = '';
   String user = '';
   String password = '';
-  String logo =
-      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*###################################################
+      #                       AppBar                      #
+      ###################################################*/
       appBar: AppBar(
         backgroundColor: kblack,
         title: Center(
@@ -53,6 +55,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+      /*###################################################
+      #                       Body                        #
+      ###################################################*/
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -157,15 +162,24 @@ class _LoginPageState extends State<LoginPage> {
                               _formKey2.currentState!.validate()) {
                             respLogin = await controller.postLogin(
                                 url, 'logar-usuario', user, password);
+                            // update current user
+                            userID = respLogin;
+                            // print response message
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                   content: Text(respLogin != '-1'
                                       ? 'login sucessfull'
                                       : 'Login faild')),
                             );
-                            Navigator.pop(context);
-                            //TODO:VOLTAR PARA MAIN COM USER
-
+                            // return to main page and clear Nav
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    HomePage(currentPage: 1),
+                              ),
+                              (route) => false,
+                            );
                           }
                         },
                         child: const Text(

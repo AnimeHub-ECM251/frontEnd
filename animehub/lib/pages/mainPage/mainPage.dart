@@ -1,5 +1,6 @@
 import 'package:animehub/globals/variables.dart';
 import 'package:animehub/pages/LoginPage/LoginPage.dart';
+import 'package:animehub/pages/userPage/UserPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return LoginPage();
+                          return (userID != '-1') ? UserPage() : LoginPage();
                         },
                       ),
                     ),
@@ -132,7 +133,14 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Minha conta'),
               onTap: () {
-                //TODO: pag do user
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return UserPage();
+                    },
+                  ),
+                );
               },
             ),
           ],

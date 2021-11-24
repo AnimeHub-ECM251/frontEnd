@@ -33,7 +33,6 @@ class _AnimePageState extends State<AnimePage> {
   String pubRating = '-1';
   String episodes = '-1';
   String genre = '';
-  String userID = '-1';
   var rated;
   var rating;
   var comments;
@@ -47,13 +46,14 @@ class _AnimePageState extends State<AnimePage> {
 
   /// Update the user inteface with refreshed data
   void updateUI() async {
-    var animeData =
-        await controller.getData(url, 'anime/${widget.animeID}');
+    var animeData = await controller.getData(url, 'anime/${widget.animeID}');
     var commentData =
         await controller.getData(url, 'comentarios/${widget.animeID}');
     try {
-      var votedData = await controller.getData(url, 'user-rating/${widget.animeID}/${userID}');
-      var isInListData = await controller.getData(url, 'watchlist/${widget.animeID}/${userID}');
+      var votedData = await controller.getData(
+          url, 'user-rating/${widget.animeID}/${userID}');
+      var isInListData = await controller.getData(
+          url, 'watchlist/${widget.animeID}/${userID}');
       rated = votedData['rated'];
       rating = votedData['rating'];
       isInList = isInListData;
@@ -61,8 +61,6 @@ class _AnimePageState extends State<AnimePage> {
       rating = '0';
       rated = false;
     }
-    
-    
 
     setState(() {
       if (animeData == null) {
@@ -114,7 +112,12 @@ class _AnimePageState extends State<AnimePage> {
 
             /// Buttons to add to list
             // ButtonCard(text: "Add to favorites"),
-            ButtonCard(verifyInList: isInList, userId: userID, animeId: widget.animeID ,updateUI: updateUI,),
+            ButtonCard(
+              verifyInList: isInList,
+              userId: userID,
+              animeId: widget.animeID,
+              updateUI: updateUI,
+            ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -129,8 +132,13 @@ class _AnimePageState extends State<AnimePage> {
                 ),
               ],
             ),
-            RateBar(rated: rated,rating: rating, updateUI: updateUI, userId: userID, animeId: widget.animeID,),
-
+            RateBar(
+              rated: rated,
+              rating: rating,
+              updateUI: updateUI,
+              userId: userID,
+              animeId: widget.animeID,
+            ),
 
             Information(
                 studio: studio,
@@ -153,8 +161,8 @@ class _AnimePageState extends State<AnimePage> {
                       return CommentPage();
                     }),
                   );
-                  controller.postComment(url,
-                      'criar-comentario', text, userID, widget.animeID);
+                  controller.postComment(
+                      url, 'criar-comentario', text, userID, widget.animeID);
                   setState(() {
                     updateUI();
                   });

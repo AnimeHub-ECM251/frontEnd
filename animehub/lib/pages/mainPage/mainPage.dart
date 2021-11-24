@@ -121,9 +121,8 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: kdarkGrey,
               ),
-              child: Text(
-                'Menu',
-                style: TextStyle(color: korange),
+              child: Image.network(
+                logoMenu,
               ),
             ),
             ListTile(

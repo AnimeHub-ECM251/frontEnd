@@ -38,7 +38,7 @@ class PageBarConteiner extends StatelessWidget {
                               currentPage: btnID,
                             );
                           }),
-                        )
+                        ),
                       }),
           ],
         ),

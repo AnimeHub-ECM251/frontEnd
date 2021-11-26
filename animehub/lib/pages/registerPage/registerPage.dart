@@ -16,145 +16,214 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final String logo =
-      'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
-
   Controller controller = Controller();
 
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   final _formKey3 = GlobalKey<FormState>();
-
+  String respLogin = '';
   String user = '';
   String password = '';
   String email = '';
-
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kblack,
-        title: Center(
-          child: TextButton(
-            child: Image.network(
-              logo,
-              width: 120,
-              height: 80,
-            ),
-            onPressed: () => {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage(currentPage: 1),
-                ),
-                (route) => false,
+          backgroundColor: kblack,
+          title: Center(
+            child: TextButton(
+              child: Image.network(
+                logo,
+                width: 120,
+                height: 80,
               ),
-            },
-          ),
-         )),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: kdarkGrey,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelStyle: kinfoCardTextStyle, labelText: 'username'),
-                  style: kbuttonCardTextStyle,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Can\'t be blank';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    user = value;
-                  },
+              onPressed: () => {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomePage(currentPage: 1),
+                  ),
+                  (route) => false,
                 ),
-              ),
-            ),
-          ),
-          Form(
-            key: _formKey2,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: kdarkGrey,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelStyle: kinfoCardTextStyle, labelText: 'password'),
-                  style: kbuttonCardTextStyle,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Can\'t be blank';
-                    }
-                    return null;
-                  },
-                   onChanged: (value) {
-                     // Encoding password
-                     var bytes = utf8.encode(value);
-                     var digest = sha256.convert(bytes);
-                     password = digest.toString();
-                     print(password);
-                  },
-                ),
-              ),
-            ),
-          ),
-          Form(
-            key: _formKey3,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: kdarkGrey,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelStyle: kinfoCardTextStyle, labelText: 'email'),
-                  style: kbuttonCardTextStyle,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Can\'t be blank';
-                    }
-                    return null;
-                  },
-                   onChanged: (value) {
-                    email = value;
-                  },
-                ),
-              ),
-            ),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
-            onPressed: () async {
-              if (_formKey.currentState!.validate() &&
-                  _formKey2.currentState!.validate() &&
-                  _formKey3.currentState!.validate()) {
-
-                //TODO verificar POST de cadastro
-                await controller.postRegister(url, 'cadastrar-usuario', user, password, email);
-                await ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Creating user')),
-                );
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Submit'),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
-            onPressed: () async {
-              
-                Navigator.pop(context);
               },
-            child: const Text('Ja tenho conta'),
-          ),
-        ],
+            ),
+          )),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: Text(
+                  'Cadastrar',
+                  style: TextStyle(
+                    color: korange,
+                    fontSize: 28,
+                  ),
+                ),
+              ),
+            ),
+            /*###################################################
+            #                      INPUTS                       #
+            ###################################################*/
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelStyle: kinfoCardTextStyle, labelText: 'username'),
+                    style: kbuttonCardTextStyle,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Can\'t be blank';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      user = value;
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Form(
+              key: _formKey2,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  child: TextFormField(
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
+                      labelStyle: kinfoCardTextStyle,
+                      labelText: 'password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                    ),
+                    style: kbuttonCardTextStyle,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Can\'t be blank';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      // Encoding password
+                      var bytes = utf8.encode(value);
+                      var digest = sha256.convert(bytes);
+                      password = digest.toString();
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Form(
+              key: _formKey3,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelStyle: kinfoCardTextStyle, labelText: 'email'),
+                    style: kbuttonCardTextStyle,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Can\'t be blank';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      email = value;
+                    },
+                  ),
+                ),
+              ),
+            ),
+            /*###################################################
+            #                       BTNS                        #
+            ###################################################*/
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0, left: 24, right: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  /*###################################################
+                  #                     BTN Cadastrar                 #
+                  ###################################################*/
+                  SizedBox(
+                    width: 450,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: korange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate() &&
+                            _formKey2.currentState!.validate() &&
+                            _formKey3.currentState!.validate()) {
+                          await controller.postRegister(
+                              url, 'cadastrar-usuario', user, password, email);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(respLogin != '-1'
+                                    ? 'login sucessfull'
+                                    : 'Login faild')),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: const Text(
+                        'Cadastrar',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  /*###################################################
+                  #                    BTN  Login                     #
+                  ###################################################*/
+                  SizedBox(
+                    width: 450,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kdarkGrey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Já tenho conta'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/mock/dataAnimePage.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';
@@ -33,7 +33,6 @@ class _AnimePageState extends State<AnimePage> {
   String pubRating = '-1';
   String episodes = '-1';
   String genre = '';
-  String userID = '-1';
   var rated;
   var rating;
   var comments;

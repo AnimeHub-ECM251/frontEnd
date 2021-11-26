@@ -1,6 +1,6 @@
 import 'package:animehub/globals/styleColors.dart';
 import 'package:animehub/globals/styleText.dart';
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:flutter/material.dart';
 

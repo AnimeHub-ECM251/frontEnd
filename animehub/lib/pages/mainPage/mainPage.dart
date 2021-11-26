@@ -1,4 +1,4 @@
-import 'package:animehub/globals/url.dart';
+import 'package:animehub/globals/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:animehub/pages/mainPage/widges/cards/anime_card_fill.dart';
 import 'package:animehub/globals/styleColors.dart';

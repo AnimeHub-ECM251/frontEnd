@@ -8,7 +8,7 @@ class CommentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var comment = null;
+    var comment;
     return Scaffold(
       body: Container(
         child: SafeArea(
@@ -41,8 +41,13 @@ class CommentPage extends StatelessWidget {
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(korange)),
-                  child: Text('Send comment', style: TextStyle(color: kblack),),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(korange)),
+                  child: Text(
+                    'Send comment',
+                    style: TextStyle(color: kblack),
+                  ),
                   onPressed: () {
                     Navigator.pop(context, comment);
                   },

@@ -23,6 +23,7 @@ class NetworkHelper {
   Future postData(String endpoint, var json) async {
     // print(json);
     final response = await http.post(Uri.parse(urlBase + endpoint), body: json);
+    // ignore: unrelated_type_equality_checks
     if (response != 400) {
       print(response.statusCode);
       return response;

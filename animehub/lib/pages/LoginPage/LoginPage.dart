@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   bool _isObscure = true;
-  String respLogin = '';
+  var respLogin;
   String user = '';
   String password = '';
 
@@ -163,8 +163,9 @@ class _LoginPageState extends State<LoginPage> {
                             respLogin = await controller.postLogin(
                                 url, 'logar-usuario', user, password);
                             // update current user
-                            userID = respLogin;
-
+                            print('antes de logar' + userID);
+                            userID = respLogin.body.toString();
+                            print('depois de logar' + userID);
                             // return to main page and clear Nav
                             Navigator.pushAndRemoveUntil(
                               context,

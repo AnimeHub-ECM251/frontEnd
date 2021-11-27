@@ -1,6 +1,5 @@
 import 'package:animehub/globals/styleText.dart';
 import 'package:animehub/globals/variables.dart';
-import 'package:animehub/mock/dataAnimePage.dart';
 import 'package:animehub/pages/commentPage/CommentPage.dart';
 import 'package:animehub/pages/classes/controller.dart';
 import 'package:animehub/pages/animePage/widgets/ButtonCard.dart';
@@ -51,9 +50,9 @@ class _AnimePageState extends State<AnimePage> {
         await controller.getData(url, 'comentarios/${widget.animeID}');
     try {
       var votedData = await controller.getData(
-          url, 'user-rating/${widget.animeID}/${userID}');
+          url, 'user-rating/${widget.animeID}/' + userID);
       var isInListData = await controller.getData(
-          url, 'watchlist/${widget.animeID}/${userID}');
+          url, 'watchlist/${widget.animeID}/' + userID);
       rated = votedData['rated'];
       rating = votedData['rating'];
       isInList = isInListData;

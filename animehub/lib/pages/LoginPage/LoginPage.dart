@@ -163,9 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                             respLogin = await controller.postLogin(
                                 url, 'logar-usuario', user, password);
                             // update current user
-                            print('antes de logar' + userID);
                             userID = respLogin.body.toString();
-                            print('depois de logar' + userID);
                             // return to main page and clear Nav
                             Navigator.pushAndRemoveUntil(
                               context,

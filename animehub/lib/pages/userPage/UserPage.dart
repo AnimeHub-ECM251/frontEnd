@@ -100,13 +100,15 @@ class _UserPageState extends State<UserPage> {
             children: [],
           ),
           // fav list feeding
-          Container(
-            child: Text(
-              'Animes para assistir:',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: korange,
-                fontSize: 32,
+          Center(
+            child: Container(
+              child: Text(
+                'Animes para assistir:',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: korange,
+                  fontSize: 32,
+                ),
               ),
             ),
           ),

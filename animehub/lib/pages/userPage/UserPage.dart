@@ -14,6 +14,9 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   var animeIDSArray = [];
+  String userName = '';
+  String userImage = '';
+
   Controller controller = Controller();
 
   @override
@@ -24,17 +27,12 @@ class _UserPageState extends State<UserPage> {
 
   void updateUI() async {
     var animesIDS = await controller.getData(url, 'watchlist/user/' + userID);
-
+    var profileData = await controller.getData(url, 'get-user/' + userID);
     setState(
       () {
-        if (animesIDS == null) {
-          // return page 1 data
-          animeIDSArray = [1, 2, 3, 4, 5];
-        } else {
-          // get page requested
-          animeIDSArray = animesIDS;
-          print(animesIDS);
-        }
+        animeIDSArray = animesIDS;
+        userName = profileData['login'];
+        userImage = profileData['profilePicture'];
       },
     );
   }
@@ -45,7 +43,7 @@ class _UserPageState extends State<UserPage> {
 
     return Scaffold(
       /*##########################################################
-      #                        AppBar                            #
+      #                                                   AppBar                                                    #
       ##########################################################*/
       backgroundColor: kdarkGrey,
       appBar: AppBar(
@@ -96,8 +94,24 @@ class _UserPageState extends State<UserPage> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            children: [],
+          Center(
+            child: Column(
+              children: [
+                Text(
+                  'Bem vindo ' + userName + ' !',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: korange,
+                    fontSize: 32,
+                  ),
+                ),
+                Image.network(
+                  userImage,
+                  width: 340,
+                  height: 260,
+                ),
+              ],
+            ),
           ),
           // fav list feeding
           Container(

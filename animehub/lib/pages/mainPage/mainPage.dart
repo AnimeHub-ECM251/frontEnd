@@ -118,13 +118,15 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: kdarkGrey,
-              ),
-              child: Image.network(
-                logoMenu,
-              ),
-            ),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+                child: FittedBox(
+                  child: Image.network(
+                    logoMenu,
+                  ),
+                  fit: BoxFit.contain,
+                )),
             ListTile(
               leading: Icon(
                 Icons.home,
@@ -136,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return UserPage();
+                      return (userID != '-1') ? UserPage() : LoginPage();
                     },
                   ),
                 );

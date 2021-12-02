@@ -1,5 +1,5 @@
-//String url = 'http://ec2-52-67-251-187.sa-east-1.compute.amazonaws.com:8000/';
-String url = 'http://ec2-18-231-166-182.sa-east-1.compute.amazonaws.com:8000/';
+String url =
+    'https://mr9ezzzhu1.execute-api.sa-east-1.amazonaws.com/dev/animehub';
 String logo =
     'https://cdn.discordapp.com/attachments/822141817520652299/907415173944463420/unknown.png';
 String logoMenu =

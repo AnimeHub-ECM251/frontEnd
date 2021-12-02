@@ -42,118 +42,119 @@ class _UserPageState extends State<UserPage> {
     // semi mock
 
     return Scaffold(
-      /*##########################################################
+        /*##########################################################
       #                                                   AppBar                                                    #
       ##########################################################*/
-      backgroundColor: kdarkGrey,
-      appBar: AppBar(
-        backgroundColor: kblack,
-        // Home Page btn
-        title: Center(
-          child: TextButton(
-            child: Image.network(
-              logo,
-              width: 120,
-              height: 80,
-            ),
-            onPressed: () => {
-              // Return to main page and clear Nav stack
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage(currentPage: 1),
-                ),
-                (route) => false,
+        backgroundColor: kdarkGrey,
+        appBar: AppBar(
+          backgroundColor: kblack,
+          // Home Page btn
+          title: Center(
+            child: TextButton(
+              child: Image.network(
+                logo,
+                width: 120,
+                height: 80,
               ),
-            },
-          ),
-        ),
-        // Rigth btn (here is for logout)
-        actions: [
-          IconButton(
-            onPressed: () {
-              userID = '-1';
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage(currentPage: 1),
+              onPressed: () => {
+                // Return to main page and clear Nav stack
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomePage(currentPage: 1),
+                  ),
+                  (route) => false,
                 ),
-                (route) => false,
-              );
-            },
-            icon: Icon(
-              Icons.logout_rounded,
+              },
             ),
-          )
-        ],
-      ),
-      /*##########################################################
+          ),
+          // Rigth btn (here is for logout)
+          actions: [
+            IconButton(
+              onPressed: () {
+                userID = '-1';
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomePage(currentPage: 1),
+                  ),
+                  (route) => false,
+                );
+              },
+              icon: Icon(
+                Icons.logout_rounded,
+              ),
+            )
+          ],
+        ),
+        /*##########################################################
       #                          Body                            #
       ##########################################################*/
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Center(
-            child: Column(
-              children: [
-                Text(
-                  'Bem vindo ' + userName + ' !',
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'Bem vindo ' + userName + ' !',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: korange,
+                        fontSize: 32,
+                      ),
+                    ),
+                    Image.network(
+                      userImage,
+                      width: 340,
+                      height: 260,
+                    ),
+                  ],
+                ),
+              ),
+              // fav list feeding
+              Container(
+                child: Text(
+                  'Animes para assistir:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: korange,
                     fontSize: 32,
                   ),
                 ),
-                Image.network(
-                  userImage,
-                  width: 340,
-                  height: 260,
-                ),
-              ],
-            ),
-          ),
-          // fav list feeding
-          Container(
-            child: Text(
-              'Animes para assistir:',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: korange,
-                fontSize: 32,
               ),
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: kblack,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: -5,
-                      blurRadius: 7,
-                      offset: Offset(0, 2),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kblack,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: -5,
+                          blurRadius: 7,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (int i = 0; i < animeIDSArray.length; i++)
-                        BodyCardFill(animeID: animeIDSArray[i].toString()),
-                    ],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (int i = 0; i < animeIDSArray.length; i++)
+                            BodyCardFill(animeID: animeIDSArray[i].toString()),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                ],
+              )
             ],
-          )
-        ],
-      ),
-    );
+          ),
+        ));
   }
 }

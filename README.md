@@ -23,6 +23,7 @@ Para desenvolver o Aplicativo, nosso grupo se dividiu em 2 equipes:
 
 ![image](https://user-images.githubusercontent.com/62917140/144518311-bd176c42-2f72-4dc4-bf30-7bef153ab8ee.png)
 ![image](https://user-images.githubusercontent.com/62917140/144518344-8a88d074-e662-4eda-bc1d-8ba1daad81cc.png)
+![image](https://user-images.githubusercontent.com/62917140/144518763-0daf4de2-d714-49af-ae2f-e711b4edf287.png)
 
 
 # Anime Screen

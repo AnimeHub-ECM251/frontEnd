@@ -22,18 +22,15 @@ Para desenvolver o Aplicativo, nosso grupo se dividiu em 2 equipes:
 # Login screen
 
 ![image](https://user-images.githubusercontent.com/62917140/144518311-bd176c42-2f72-4dc4-bf30-7bef153ab8ee.png)
-
 ![image](https://user-images.githubusercontent.com/62917140/144518344-8a88d074-e662-4eda-bc1d-8ba1daad81cc.png)
 
 
 # Anime Screen
 
 ![image](https://user-images.githubusercontent.com/62917140/144518375-5bf73031-3e4e-48e0-810a-ab3a0432a769.png)
-
 ![image](https://user-images.githubusercontent.com/62917140/144518392-6d34291f-9560-4f46-91e2-4959f57fb7c0.png)
 
 ![image](https://user-images.githubusercontent.com/62917140/144518435-69c046d2-244b-4ab5-bcc3-c1f9bc14ea3e.png)
-
 ![image](https://user-images.githubusercontent.com/62917140/144518456-98808af4-6e00-40ca-8799-af6f6a6eead2.png)
 
 # User Screen

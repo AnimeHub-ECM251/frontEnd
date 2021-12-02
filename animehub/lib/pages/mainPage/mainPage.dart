@@ -102,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return (userID != '-1') ? UserPage() : LoginPage();
+                          return (int.parse(userID) != -1)
+                              ? UserPage()
+                              : LoginPage();
                         },
                       ),
                     ),
@@ -138,7 +140,9 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return (userID != '-1') ? UserPage() : LoginPage();
+                      return (int.parse(userID) != -1)
+                          ? UserPage()
+                          : LoginPage();
                     },
                   ),
                 );

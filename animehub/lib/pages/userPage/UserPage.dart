@@ -43,8 +43,8 @@ class _UserPageState extends State<UserPage> {
 
     return Scaffold(
         /*##########################################################
-      #                                                   AppBar                                                    #
-      ##########################################################*/
+      #                    AppBar                                  #
+      #############################################################*/
         backgroundColor: kdarkGrey,
         appBar: AppBar(
           backgroundColor: kblack,
@@ -88,8 +88,8 @@ class _UserPageState extends State<UserPage> {
           ],
         ),
         /*##########################################################
-      #                          Body                            #
-      ##########################################################*/
+        #                          Body                            #
+        ############################################################*/
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

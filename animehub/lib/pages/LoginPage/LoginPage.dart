@@ -166,9 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                             userID = respLogin.body.toString();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(respLogin != '-1'
-                                    ? 'login sucessfull'
-                                    : 'Login faild'),
+                                content: Text(
+                                    int.parse(respLogin.body.toString()) != -1
+                                        ? 'login sucessfull'
+                                        : 'Login faild'),
                               ),
                             );
                             // return to main page and clear Nav

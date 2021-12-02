@@ -183,8 +183,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content: Text(respLogin != '-1'
-                                    ? 'login sucessfull'
-                                    : 'Login faild')),
+                                    ? 'Cadastrado com sucesso'
+                                    : 'Erro no cadastro')),
                           );
                           Navigator.pop(context);
                         }

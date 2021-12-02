@@ -164,6 +164,13 @@ class _LoginPageState extends State<LoginPage> {
                                 url, 'logar-usuario', user, password);
                             // update current user
                             userID = respLogin.body.toString();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(respLogin != '-1'
+                                    ? 'login sucessfull'
+                                    : 'Login faild'),
+                              ),
+                            );
                             // return to main page and clear Nav
                             Navigator.pushAndRemoveUntil(
                               context,

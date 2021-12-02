@@ -10,7 +10,7 @@
 | [Arthur Torres Barros](https://github.com/CyberGoat9152) | 17.01913-3 | 3 | Front End |
 
 ## Overview do Projeto
-Repositório do Back End do projeto Anime Hub.
+Repositório do Front End do projeto Anime Hub.
 
 Esse projeto foi feito para a disciplina ECM251-Linguagens de Programação I.
 

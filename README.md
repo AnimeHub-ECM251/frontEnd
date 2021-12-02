@@ -36,5 +36,6 @@ Para desenvolver o Aplicativo, nosso grupo se dividiu em 2 equipes:
 # User Screen
 
 ![image](https://user-images.githubusercontent.com/62917140/144518622-132917b6-31e2-4018-95b7-09e6a7bac873.png)
+![image](https://user-images.githubusercontent.com/62917140/144518703-d7e7bb03-6f63-4682-aacf-85114180363d.png)
 
 
